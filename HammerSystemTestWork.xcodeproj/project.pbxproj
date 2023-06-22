@@ -24,6 +24,7 @@
 		04E9F8492A44B3D700B42CB5 /* CategoryFoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8482A44B3D700B42CB5 /* CategoryFoodCell.swift */; };
 		04E9F84B2A44B3E600B42CB5 /* IReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F84A2A44B3E600B42CB5 /* IReusableCell.swift */; };
 		04E9F8512A44B90200B42CB5 /* MenuHeaderViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8502A44B90200B42CB5 /* MenuHeaderViewDelegate.swift */; };
+		04E9F8532A44CB7500B42CB5 /* PromoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8522A44CB7500B42CB5 /* PromoModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		04E9F8482A44B3D700B42CB5 /* CategoryFoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFoodCell.swift; sourceTree = "<group>"; };
 		04E9F84A2A44B3E600B42CB5 /* IReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IReusableCell.swift; sourceTree = "<group>"; };
 		04E9F8502A44B90200B42CB5 /* MenuHeaderViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHeaderViewDelegate.swift; sourceTree = "<group>"; };
+		04E9F8522A44CB7500B42CB5 /* PromoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 		043CCFC52A444DE300ED6614 /* MenuModule */ = {
 			isa = PBXGroup;
 			children = (
+				04E9F8542A44CB7800B42CB5 /* Model */,
 				043CCFC42A444D5000ED6614 /* View */,
 				04E9F83E2A44AEBA00B42CB5 /* Presenter */,
 			);
@@ -186,6 +189,14 @@
 				04E9F8502A44B90200B42CB5 /* MenuHeaderViewDelegate.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		04E9F8542A44CB7800B42CB5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				04E9F8522A44CB7500B42CB5 /* PromoModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,6 +278,7 @@
 				04E9F8472A44B3C800B42CB5 /* BannerCell.swift in Sources */,
 				04E9F84B2A44B3E600B42CB5 /* IReusableCell.swift in Sources */,
 				04E9F83D2A44AEAE00B42CB5 /* MenuPresenter.swift in Sources */,
+				04E9F8532A44CB7500B42CB5 /* PromoModel.swift in Sources */,
 				04E9F8492A44B3D700B42CB5 /* CategoryFoodCell.swift in Sources */,
 				043CCFB32A444C8A00ED6614 /* MenuViewController.swift in Sources */,
 				04E9F82F2A444EF400B42CB5 /* MainVC.swift in Sources */,

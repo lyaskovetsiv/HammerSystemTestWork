@@ -46,12 +46,15 @@ extension MainVC {
 		// Моковые вьюконтроллеры
 		let contactsVC = UIViewController()
 		setupVC(vc: contactsVC, image: Constants.contactsImage, title: "Контакты")
+		contactsVC.tabBarItem.isEnabled = false
 
 		let profileVC = UIViewController()
 		setupVC(vc: profileVC, image: Constants.profileImage, title: "Профиль")
+		profileVC.tabBarItem.isEnabled = false
 
 		let trashVC = UIViewController()
 		setupVC(vc: trashVC, image: Constants.trashImage, title: "Корзина")
+		trashVC.tabBarItem.isEnabled = false
 
 		self.viewControllers = [menuVC, contactsVC, profileVC, trashVC]
 	}

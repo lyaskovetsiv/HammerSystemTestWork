@@ -13,6 +13,7 @@ final class MenuPresenter {
 
 	private weak var view: IMenuView!
 	private var foodItems = 10
+	private var promo: [PromoModel] = PromoModel.getMockData()
 
 	// MARK: - Inits
 
@@ -27,6 +28,14 @@ extension MenuPresenter: IMenuPresenter {
 
 	public func getNumberOfFoodItems() -> Int {
 		return foodItems
+	}
+
+	func getNumberOfPromo() -> Int {
+		return promo.count
+	}
+	
+	func getPromo(by indexPath: IndexPath) -> PromoModel {
+		return promo[indexPath.item]
 	}
 }
 

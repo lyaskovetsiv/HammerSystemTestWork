@@ -14,8 +14,6 @@ final class BannerCell: UICollectionViewCell {
 	// MARK: - Private constants
 
 	private enum Constants {
-		// Sizes
-		static let imageCorderRadius: CGFloat = 8
 		// Images 
 		static let textBannerImage: UIImage? = nil
 	}
@@ -24,9 +22,9 @@ final class BannerCell: UICollectionViewCell {
 
 	private lazy var bannerImageView: UIImageView = {
 		let imageView = UIImageView(image: Constants.textBannerImage)
-		imageView.contentMode = .scaleAspectFit
+		imageView.contentMode = .scaleAspectFill
+		imageView.clipsToBounds = true
 		imageView.backgroundColor = .gray
-		imageView.layer.cornerRadius = Constants.imageCorderRadius
 		return imageView
 	}()
 
@@ -39,6 +37,15 @@ final class BannerCell: UICollectionViewCell {
 
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
+	}
+
+	// MARK: - Public methods
+
+	public func configure(with model: PromoModel) {
+		// Clear cell
+		bannerImageView.image = nil
+		// Configure cell
+		bannerImageView.image = model.banner
 	}
 }
 

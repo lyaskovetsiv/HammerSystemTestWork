@@ -10,4 +10,6 @@ import Foundation
 /// Протокол презентера Menu модуля
 protocol IMenuPresenter: AnyObject {
 	func getNumberOfFoodItems() -> Int
+	func getNumberOfPromo() -> Int
+	func getPromo(by indexPath: IndexPath) -> PromoModel
 }
