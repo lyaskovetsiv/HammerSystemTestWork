@@ -48,7 +48,7 @@ class MenuViewController: UIViewController {
 		return tableView
 	}()
 
-	private var selectedIndexPath: IndexPath?
+	private var selectedCategoryIndexPath: IndexPath?
 
 	// MARK: - LifeCycleOfVC
 
@@ -105,6 +105,18 @@ extension MenuViewController {
 		if let cell = collectionView.cellForItem(at: indexPath) as? CategoryFoodCell {
 			cell.updateDesign(selected: selected)
 		}
+	}
+
+	private func proceedCategoryTapCell(indexPath: IndexPath) {
+		if let selectedIndexPath = selectedCategoryIndexPath {
+			updateCellDesign(collectionView: menuHeaderView.categoriesCollectionView,
+							 indexPath: selectedIndexPath,
+							 selected: false)
+		}
+		updateCellDesign(collectionView: menuHeaderView.categoriesCollectionView,
+						 indexPath: indexPath,
+						 selected: true)
+		selectedCategoryIndexPath = indexPath
 	}
 
 	private func createCustomSeparator() -> UIView {
@@ -212,15 +224,9 @@ extension MenuViewController: UICollectionViewDelegate {
 			presenter?.bannerDidTapped(by: indexPath)
 		case menuHeaderView.categoriesCollectionView:
 			presenter?.categoryDidTapped(by: indexPath)
-			if let selectedIndexPath = selectedIndexPath {
-				updateCellDesign(collectionView: menuHeaderView.categoriesCollectionView,
-								 indexPath: selectedIndexPath,
-								 selected: false)
-			}
-			updateCellDesign(collectionView: menuHeaderView.categoriesCollectionView,
-							 indexPath: indexPath,
-							 selected: true)
-			selectedIndexPath = indexPath
+			proceedCategoryTapCell(indexPath: indexPath)
+			// Прокрутили tableView до нужного места
+			// scrollTableViewToCategory(at: selectedCategoryIndex)
 		default: break
 		}
 	}
