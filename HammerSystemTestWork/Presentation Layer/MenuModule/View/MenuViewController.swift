@@ -25,6 +25,7 @@ class MenuViewController: UIViewController {
 	private lazy var menuTableView: UITableView = {
 		let tableView = UITableView(frame: .zero)
 		tableView.backgroundColor = .white
+		tableView.showsVerticalScrollIndicator = false
 		tableView.register(UITableViewCell.self, forCellReuseIdentifier: "testCell")
 		return tableView
 	}()

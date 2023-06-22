@@ -11,6 +11,8 @@ import UIKit
 /// Класс headerView таблицы в Menu модуле
 final class MenuHeaderView: UIView {
 
+	static let indentifier = "testHeader"
+
 	// MARK: - Private constants
 
 	private enum Constants {
@@ -21,8 +23,6 @@ final class MenuHeaderView: UIView {
 		static let selectTownStackViewTopAnchor: CGFloat = 16
 		static let selectTownStackViewLeadingAnchor: CGFloat = 16
 	}
-
-	static let indentifier = "testHeader"
 
 	// MARK: - UI
 
@@ -72,8 +72,6 @@ extension MenuHeaderView {
 	private func setupView() {
 		backgroundColor = Constants.mainBackgroundColor
 		setupTownStackView()
-
-
 		addSubview(selectTownStackView)
 		addSubview(bannerCollecitonView)
 		addSubview(categoriesCollectionView)
