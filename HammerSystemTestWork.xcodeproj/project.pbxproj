@@ -16,6 +16,10 @@
 		04E9F8322A44684700B42CB5 /* MenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8312A44684700B42CB5 /* MenuHeaderView.swift */; };
 		04E9F8342A44718900B42CB5 /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8332A44718900B42CB5 /* FoodCell.swift */; };
 		04E9F83A2A44903800B42CB5 /* SelectTownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8392A44903800B42CB5 /* SelectTownView.swift */; };
+		04E9F83D2A44AEAE00B42CB5 /* MenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F83C2A44AEAE00B42CB5 /* MenuPresenter.swift */; };
+		04E9F8402A44AEDB00B42CB5 /* IMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F83F2A44AEDB00B42CB5 /* IMenuView.swift */; };
+		04E9F8422A44AF0F00B42CB5 /* IMenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8412A44AF0F00B42CB5 /* IMenuPresenter.swift */; };
+		04E9F8442A44AFA800B42CB5 /* ModuleAssembley.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8432A44AFA800B42CB5 /* ModuleAssembley.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,10 @@
 		04E9F8312A44684700B42CB5 /* MenuHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHeaderView.swift; sourceTree = "<group>"; };
 		04E9F8332A44718900B42CB5 /* FoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
 		04E9F8392A44903800B42CB5 /* SelectTownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTownView.swift; sourceTree = "<group>"; };
+		04E9F83C2A44AEAE00B42CB5 /* MenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPresenter.swift; sourceTree = "<group>"; };
+		04E9F83F2A44AEDB00B42CB5 /* IMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMenuView.swift; sourceTree = "<group>"; };
+		04E9F8412A44AF0F00B42CB5 /* IMenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMenuPresenter.swift; sourceTree = "<group>"; };
+		04E9F8432A44AFA800B42CB5 /* ModuleAssembley.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleAssembley.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +72,7 @@
 			children = (
 				043CCFBC2A444C8C00ED6614 /* Info.plist */,
 				043CCFC22A444CE300ED6614 /* Application */,
+				04E9F8452A44AFAB00B42CB5 /* Assembley */,
 				04E9F8302A444F7B00B42CB5 /* Presentation Layer */,
 			);
 			path = HammerSystemTestWork;
@@ -92,8 +101,8 @@
 			isa = PBXGroup;
 			children = (
 				04E9F8352A44732B00B42CB5 /* Cells */,
-				04E9F8392A44903800B42CB5 /* SelectTownView.swift */,
-				04E9F8312A44684700B42CB5 /* MenuHeaderView.swift */,
+				04E9F83B2A44AE7100B42CB5 /* Other */,
+				04E9F83F2A44AEDB00B42CB5 /* IMenuView.swift */,
 				043CCFB22A444C8A00ED6614 /* MenuViewController.swift */,
 			);
 			path = View;
@@ -103,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				043CCFC42A444D5000ED6614 /* View */,
+				04E9F83E2A44AEBA00B42CB5 /* Presenter */,
 			);
 			path = MenuModule;
 			sourceTree = "<group>";
@@ -122,6 +132,32 @@
 				04E9F8332A44718900B42CB5 /* FoodCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		04E9F83B2A44AE7100B42CB5 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				04E9F8392A44903800B42CB5 /* SelectTownView.swift */,
+				04E9F8312A44684700B42CB5 /* MenuHeaderView.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		04E9F83E2A44AEBA00B42CB5 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				04E9F8412A44AF0F00B42CB5 /* IMenuPresenter.swift */,
+				04E9F83C2A44AEAE00B42CB5 /* MenuPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		04E9F8452A44AFAB00B42CB5 /* Assembley */ = {
+			isa = PBXGroup;
+			children = (
+				04E9F8432A44AFA800B42CB5 /* ModuleAssembley.swift */,
+			);
+			path = Assembley;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,10 +231,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				04E9F8322A44684700B42CB5 /* MenuHeaderView.swift in Sources */,
+				04E9F8442A44AFA800B42CB5 /* ModuleAssembley.swift in Sources */,
 				04E9F8342A44718900B42CB5 /* FoodCell.swift in Sources */,
+				04E9F8402A44AEDB00B42CB5 /* IMenuView.swift in Sources */,
 				04E9F83A2A44903800B42CB5 /* SelectTownView.swift in Sources */,
+				04E9F83D2A44AEAE00B42CB5 /* MenuPresenter.swift in Sources */,
 				043CCFB32A444C8A00ED6614 /* MenuViewController.swift in Sources */,
 				04E9F82F2A444EF400B42CB5 /* MainVC.swift in Sources */,
+				04E9F8422A44AF0F00B42CB5 /* IMenuPresenter.swift in Sources */,
 				043CCFAF2A444C8A00ED6614 /* AppDelegate.swift in Sources */,
 				043CCFB12A444C8A00ED6614 /* SceneDelegate.swift in Sources */,
 			);

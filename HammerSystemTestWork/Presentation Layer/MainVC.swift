@@ -40,7 +40,7 @@ extension MainVC {
 	}
 
 	private func setupControllers() {
-		let menuVC = MenuViewController()
+		let menuVC = ModuleAssembley.createMenuModule()
 		setupVC(vc: menuVC, image: Constants.menuImage, title: "Меню")
 
 		// Моковые вьюконтроллеры

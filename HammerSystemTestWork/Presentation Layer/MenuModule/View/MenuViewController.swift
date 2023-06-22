@@ -11,6 +11,8 @@ import UIKit
 /// Класс вью Menu  модуля
 class MenuViewController: UIViewController {
 
+	var presenter: IMenuPresenter?
+
 	// MARK: - Private constants
 
 	private enum Constants {
@@ -137,4 +139,11 @@ extension MenuViewController: UITableViewDelegate {
 			self.view.layoutIfNeeded()
 		}
 	}
+}
+
+
+// MARK: - IMenuView
+
+extension MenuViewController: IMenuView {
+
 }
