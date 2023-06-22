@@ -14,41 +14,18 @@ class MenuViewController: UIViewController {
 	// MARK: - Private constants
 
 	private enum Constants {
-		// Colors
-		static let mainBackgroundColor: UIColor = #colorLiteral(red: 0.9487603307, green: 0.9565995336, blue: 0.9732769132, alpha: 1)
-		// Fonts
-		static let mainTextFont: UIFont = .systemFont(ofSize: 17)
-		// Images
-		static let downArrowImage: UIImage? = UIImage(named: "downArrayIcon")
-		// Sizes
-		static let selectedTownSpacing: CGFloat = 8
-		// Constraits
-		static let foodTableViewTopAnchor: CGFloat = 252
-		static let selectTownStackViewTopAnchor: CGFloat = 16
-		static let selectTownStackViewLeadingAnchor: CGFloat = 16
+		static let mainBackgroundColor: UIColor = .white
+		static let heightForRow: CGFloat = 170
 	}
 
 	// MARK: - UI
 
-	private lazy var townLabel: UILabel = {
-		let label = UILabel(frame: .zero)
-		label.text = "Москва"
-		label.font = Constants.mainTextFont
-		return label
-	}()
+	private var menuHeaderView: MenuHeaderView!
 
-	private lazy var downArrayImageView: UIImageView = {
-		let imageView = UIImageView(image: Constants.downArrowImage)
-		imageView.contentMode = .scaleAspectFit
-		return imageView
-	}()
-
-	private var selectTownStackView: UIStackView!
-
-	private lazy var foodTableView: UITableView = {
+	private lazy var menuTableView: UITableView = {
 		let tableView = UITableView(frame: .zero)
 		tableView.backgroundColor = .white
-		tableView.layer.cornerRadius = 16
+		tableView.register(UITableViewCell.self, forCellReuseIdentifier: "testCell")
 		return tableView
 	}()
 
@@ -56,43 +33,56 @@ class MenuViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view.
 		setupView()
+		menuTableView.delegate = self
+		menuTableView.dataSource = self
 	}
 }
 
+// MARK: - UITableViewDataSource
+
+extension MenuViewController: UITableViewDataSource {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return 10
+	}
+
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "testCell", for: indexPath)
+		return cell
+	}
+}
+
+// MARK: - UITableViewDelegate
+
+extension MenuViewController: UITableViewDelegate {
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		return Constants.heightForRow
+	}
+
+	func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
+	}
+}
 
 // MARK: - Private methods
 
 extension MenuViewController {
 	private func setupView() {
 		view.backgroundColor = Constants.mainBackgroundColor
-		setupTownStackView()
+		let menuHeaderView = MenuHeaderView(frame: CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: 300)))
+		menuTableView.tableHeaderView = menuHeaderView
 
-		view.addSubview(selectTownStackView)
-		view.addSubview(foodTableView)
+		view.addSubview(menuTableView)
 		setupConstraits()
 	}
 
 	private func setupConstraits() {
-		selectTownStackView.translatesAutoresizingMaskIntoConstraints = false
+		menuTableView.translatesAutoresizingMaskIntoConstraints = false
 		NSLayoutConstraint.activate([
-			selectTownStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.selectTownStackViewTopAnchor),
-			selectTownStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.selectTownStackViewLeadingAnchor)
+			menuTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+			menuTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+			menuTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+			menuTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
 		])
-
-		foodTableView.translatesAutoresizingMaskIntoConstraints = false
-		NSLayoutConstraint.activate([
-			foodTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-			foodTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-			foodTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-			foodTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.foodTableViewTopAnchor)
-		])
-	}
-
-	private func setupTownStackView() {
-		selectTownStackView = UIStackView(arrangedSubviews: [townLabel, downArrayImageView])
-		selectTownStackView.axis = .horizontal
-		selectTownStackView.spacing = Constants.selectedTownSpacing
 	}
 }
