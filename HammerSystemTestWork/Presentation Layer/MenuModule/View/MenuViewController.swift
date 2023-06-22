@@ -117,28 +117,24 @@ extension MenuViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
-}
-
-extension MenuViewController: UIScrollViewDelegate {
 
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		let y = scrollView.contentOffset.y
 		let isSwipingDown = y <= 0
-		let snappingAllowed = y > 30
+		let snappingAllowed = y > 1
 
-		// Спрятать коллекцию с баннерами
 		UIView.animate(withDuration: 0.3) {
 			let value = isSwipingDown ? 1.0 : 0
 			self.menuHeaderView.changeBannersCollectionViewAlpha(value: value)
 		}
 
-		// Удалить коллекцию с баннерами
-		// Пересчитать констреиты
-		// topAnchor у menuHeader дожна быть у categories
-		UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.3,
-													   delay: 0) {
+		UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.3, delay: 0) {
+			if snappingAllowed {
+				self.menuHeaderView.compressMenuHeaderView()
+			} else {
+				self.menuHeaderView.uncompressMenuHeaderView()
+			}
 			self.view.layoutIfNeeded()
 		}
-
 	}
 }

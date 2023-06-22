@@ -59,7 +59,7 @@ final class SelectTownView: UIView {
 
 extension SelectTownView {
 	private func setupView() {
-		backgroundColor = .blue
+		backgroundColor = Constants.mainBackgroundColor
 		setupTownStackView()
 		addSubview(selectTownStackView)
 		setupConstraits()

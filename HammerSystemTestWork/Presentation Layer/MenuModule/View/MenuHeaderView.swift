@@ -43,6 +43,9 @@ final class MenuHeaderView: UIView {
 		return collectionView
 	}()
 
+	private var categoriesCollectionViewTopAnchor: NSLayoutConstraint!
+	private var bannersConstraits: [NSLayoutConstraint]!
+
 	// MARK: - Inits
 
 	override init(frame: CGRect) {
@@ -52,6 +55,36 @@ final class MenuHeaderView: UIView {
 
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
+	}
+
+	// MARK: - Public methods
+
+	/// Метод вью, для изменения параметра alpha у bannersCollectionView
+	/// - Parameter value: Значение alpha
+	public func changeBannersCollectionViewAlpha(value: CGFloat) {
+		bannerCollecitonView.alpha = value
+	}
+
+	/// Метод вью, для его сжатия и скрытия  bannersCollectionView
+	public func compressMenuHeaderView() {
+		// Удалить у banners констреиты
+		NSLayoutConstraint.deactivate(bannersConstraits)
+		// Пересчитать констреит у Categories
+		categoriesCollectionViewTopAnchor?.isActive = false
+		categoriesCollectionViewTopAnchor = categoriesCollectionView.topAnchor.constraint(equalTo: topAnchor,
+																						  constant: Constants.categoriesCollectionViewTopAnchorConstant)
+		categoriesCollectionViewTopAnchor?.isActive = true
+	}
+
+	/// Метод вью, для его разжатия и отображения bannersCollectionView
+	public func uncompressMenuHeaderView() {
+		// Добавить у banners констреиты
+		NSLayoutConstraint.activate(bannersConstraits)
+		// Пересчитать констреит у Categories
+		categoriesCollectionViewTopAnchor?.isActive = false
+		categoriesCollectionViewTopAnchor = categoriesCollectionView.topAnchor.constraint(equalTo: bannerCollecitonView.bottomAnchor,
+																						  constant: Constants.categoriesCollectionViewTopAnchorConstant)
+		categoriesCollectionViewTopAnchor?.isActive = true
 	}
 }
 
@@ -66,25 +99,28 @@ extension MenuHeaderView {
 	}
 
 	private func setupConstraits() {
+		// Banners
 		bannerCollecitonView.translatesAutoresizingMaskIntoConstraints = false
-		NSLayoutConstraint.activate([
-			bannerCollecitonView.topAnchor.constraint(equalTo: topAnchor, constant: Constants.bannerCollecitonViewTopAnchorConstant),
-			bannerCollecitonView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.bannerCollecitonViewLeadingAnchorConstant),
+		bannersConstraits = [
+			bannerCollecitonView.topAnchor.constraint(equalTo: topAnchor,
+													  constant: Constants.bannerCollecitonViewTopAnchorConstant),
+			bannerCollecitonView.leadingAnchor.constraint(equalTo: leadingAnchor,
+														  constant: Constants.bannerCollecitonViewLeadingAnchorConstant),
 			bannerCollecitonView.trailingAnchor.constraint(equalTo: trailingAnchor),
 			bannerCollecitonView.heightAnchor.constraint(equalToConstant: Constants.bannerCollecitonViewHeight)
-		])
-
+		]
+		NSLayoutConstraint.activate(bannersConstraits)
+		// Categories
 		categoriesCollectionView.translatesAutoresizingMaskIntoConstraints = false
+		categoriesCollectionViewTopAnchor = categoriesCollectionView.topAnchor.constraint(equalTo: bannerCollecitonView.bottomAnchor,
+																						  constant: Constants.categoriesCollectionViewTopAnchorConstant)
 		NSLayoutConstraint.activate([
-			categoriesCollectionView.topAnchor.constraint(equalTo: bannerCollecitonView.bottomAnchor, constant: Constants.categoriesCollectionViewTopAnchorConstant),
-			categoriesCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.categoriesCollectionViewLeadingAnchorConstant),
+			categoriesCollectionViewTopAnchor,
+			categoriesCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor,
+															  constant: Constants.categoriesCollectionViewLeadingAnchorConstant),
 			categoriesCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-			categoriesCollectionView.heightAnchor.constraint(equalToConstant: Constants.categoriesCollectionViewHeight),
-			categoriesCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Constants.categoriesCollectionViewBottomAnchorConstant)
+			categoriesCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Constants.categoriesCollectionViewBottomAnchorConstant),
+			categoriesCollectionView.heightAnchor.constraint(equalToConstant: Constants.categoriesCollectionViewHeight)
 		])
-	}
-
-	public func changeBannersCollectionViewAlpha(value: CGFloat) {
-		bannerCollecitonView.alpha = value
 	}
 }
