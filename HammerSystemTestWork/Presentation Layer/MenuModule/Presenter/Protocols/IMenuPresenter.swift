@@ -11,10 +11,8 @@ import Foundation
 protocol IMenuPresenter: AnyObject {
 	func getNumberOfFoodItems() -> Int
 	func getFood(by indexPath: IndexPath) -> FoodModel
-
 	func getNumberOfPromo() -> Int
 	func getPromo(by indexPath: IndexPath) -> PromoModel
-
 	func getCategory(by indexPath: IndexPath) -> CategoryModel
 	func getNumberOfCategories() -> Int
 }

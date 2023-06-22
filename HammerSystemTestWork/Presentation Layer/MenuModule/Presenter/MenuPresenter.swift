@@ -11,6 +11,8 @@ import Foundation
 /// Класс презентера Menu  модуля
 final class MenuPresenter {
 
+	// MARK: - Private properties
+
 	private weak var view: IMenuView!
 	private var food: [FoodModel] = FoodModel.getMockData()
 	private var categories: [CategoryModel] = CategoryModel.getMockData()

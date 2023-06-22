@@ -89,7 +89,7 @@
 				043CCFBC2A444C8C00ED6614 /* Info.plist */,
 				043CCFC22A444CE300ED6614 /* Application */,
 				04E9F8452A44AFAB00B42CB5 /* Assembley */,
-				04E9F84C2A44B3E900B42CB5 /* Protocols */,
+				04E9F85D2A44DE4B00B42CB5 /* Helpers */,
 				04E9F8302A444F7B00B42CB5 /* Presentation Layer */,
 			);
 			path = HammerSystemTestWork;
@@ -165,7 +165,7 @@
 		04E9F83E2A44AEBA00B42CB5 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				04E9F8412A44AF0F00B42CB5 /* IMenuPresenter.swift */,
+				04E9F85E2A44DE8400B42CB5 /* Protocols */,
 				04E9F83C2A44AEAE00B42CB5 /* MenuPresenter.swift */,
 			);
 			path = Presenter;
@@ -222,6 +222,22 @@
 				04E9F8332A44718900B42CB5 /* FoodCell.swift */,
 			);
 			path = TableViews;
+			sourceTree = "<group>";
+		};
+		04E9F85D2A44DE4B00B42CB5 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				04E9F84C2A44B3E900B42CB5 /* Protocols */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		04E9F85E2A44DE8400B42CB5 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				04E9F8412A44AF0F00B42CB5 /* IMenuPresenter.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

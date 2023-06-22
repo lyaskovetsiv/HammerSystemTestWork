@@ -22,6 +22,8 @@ class MenuViewController: UIViewController {
 		static let heightForRow: CGFloat = 170
 		static let menuHeaderViewHeight: CGFloat = 260
 		static let minimumInteritemSpacingForSection: CGFloat = 16
+		static let sizeForBannerCell: CGSize = CGSize(width: 300, height: 122)
+		static let suzeForCategoryCell: CGSize = CGSize(width: 95, height: 32)
 	}
 
 	// MARK: - UI
@@ -123,6 +125,9 @@ extension MenuViewController: UITableViewDelegate {
 
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
+		if let model = presenter?.getFood(by: indexPath) {
+			print("В корзину добавлен товар: \(model.title)")
+		}
 	}
 
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -159,7 +164,8 @@ extension MenuViewController: UICollectionViewDataSource {
 	}
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		if collectionView == menuHeaderView.bannerCollectionView {
+		switch collectionView {
+		case menuHeaderView.bannerCollectionView:
 			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BannerCell.identifier, for: indexPath) as? BannerCell else {
 				return UICollectionViewCell()
 			}
@@ -167,7 +173,7 @@ extension MenuViewController: UICollectionViewDataSource {
 				cell.configure(with: model)
 			}
 			return cell
-		} else if collectionView == menuHeaderView.categoriesCollectionView {
+		case menuHeaderView.categoriesCollectionView:
 			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryFoodCell.identifier, for: indexPath) as? CategoryFoodCell else {
 				return UICollectionViewCell()
 			}
@@ -175,25 +181,9 @@ extension MenuViewController: UICollectionViewDataSource {
 				cell.configure(with: model)
 			}
 			return cell
+		default: break
 		}
 		return UICollectionViewCell()
-	}
-}
-
-// MARK: - UICollectionViewDelegateFlowLayout
-
-extension MenuViewController: UICollectionViewDelegateFlowLayout {
-	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		if collectionView == menuHeaderView.bannerCollectionView {
-			return CGSize(width: 300, height: 122)
-		} else if collectionView == menuHeaderView.categoriesCollectionView {
-			return CGSize(width: 95, height: 32)
-		}
-		return CGSize(width: 0, height: 0)
-	}
-
-	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-		return Constants.minimumInteritemSpacingForSection
 	}
 }
 
@@ -201,11 +191,36 @@ extension MenuViewController: UICollectionViewDelegateFlowLayout {
 
 extension MenuViewController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		if collectionView == menuHeaderView.bannerCollectionView {
-			print("Promo tapped")
-		} else if collectionView == menuHeaderView.categoriesCollectionView {
-			print("Category tapped")
+		switch collectionView {
+		case menuHeaderView.bannerCollectionView:
+			if let model = presenter?.getPromo(by: indexPath) {
+				print("Выбрана акция: \(model.title)")
+			}
+		case menuHeaderView.categoriesCollectionView:
+			if let model = presenter?.getCategory(by: indexPath) {
+				print("Выбрана категория: \(model.title)")
+			}
+		default: break
 		}
+	}
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+
+extension MenuViewController: UICollectionViewDelegateFlowLayout {
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+		switch collectionView {
+		case menuHeaderView.bannerCollectionView:
+			return Constants.sizeForBannerCell
+		case menuHeaderView.categoriesCollectionView:
+			return Constants.suzeForCategoryCell
+		default: break
+		}
+		return CGSize.zero
+	}
+
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+		return Constants.minimumInteritemSpacingForSection
 	}
 }
 
