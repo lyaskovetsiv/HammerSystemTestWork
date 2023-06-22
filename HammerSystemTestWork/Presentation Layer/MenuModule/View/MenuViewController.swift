@@ -39,7 +39,7 @@ class MenuViewController: UIViewController {
 		let tableView = UITableView(frame: .zero)
 		tableView.backgroundColor = .white
 		tableView.showsVerticalScrollIndicator = false
-		tableView.register(FoodCell.self, forCellReuseIdentifier: FoodCell.indentifier)
+		tableView.register(FoodCell.self, forCellReuseIdentifier: FoodCell.identifier)
 		return tableView
 	}()
 
@@ -98,11 +98,11 @@ extension MenuViewController {
 
 extension MenuViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 10
+		return presenter?.getNumberOfFoodItems() ?? 0
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		guard let cell = tableView.dequeueReusableCell(withIdentifier: FoodCell.indentifier, for: indexPath) as? FoodCell else {
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: FoodCell.identifier, for: indexPath) as? FoodCell else {
 			return UITableViewCell()
 		}
 		return cell

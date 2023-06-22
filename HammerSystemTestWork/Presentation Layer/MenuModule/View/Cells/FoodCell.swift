@@ -11,8 +11,6 @@ import UIKit
 /// Класс ячейки таблицы Menu модуля
 final class FoodCell: UITableViewCell {
 
-	static let indentifier: String = "foodCell"
-
 	// MARK: - Private constants
 
 	private enum Constants {
@@ -139,5 +137,13 @@ extension FoodCell {
 			buyBtn.trailingAnchor.constraint(equalTo: composeView.trailingAnchor),
 			buyBtn.bottomAnchor.constraint(equalTo: composeView.bottomAnchor),
 		])
+	}
+}
+
+// MARK: - IReusableCell
+
+extension FoodCell: IReusableCell {
+	static var identifier: String {
+		return "foodCell"
 	}
 }

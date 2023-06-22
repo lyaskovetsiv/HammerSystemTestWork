@@ -9,5 +9,5 @@ import Foundation
 
 /// Протокол презентера Menu модуля
 protocol IMenuPresenter: AnyObject {
-
+	func getNumberOfFoodItems() -> Int
 }

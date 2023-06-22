@@ -32,6 +32,7 @@ final class MenuHeaderView: UIView {
 	private lazy var bannerCollecitonView: UICollectionView = {
 		let layout = UICollectionViewFlowLayout()
 		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+		collectionView.register(BannerCell.self, forCellWithReuseIdentifier: BannerCell.identifier)
 		collectionView.backgroundColor = .green
 		return collectionView
 	}()
@@ -39,6 +40,7 @@ final class MenuHeaderView: UIView {
 	private lazy var categoriesCollectionView: UICollectionView = {
 		let layout = UICollectionViewFlowLayout()
 		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+		collectionView.register(CategoryFoodCell.self, forCellWithReuseIdentifier: CategoryFoodCell.identifier)
 		collectionView.backgroundColor = .red
 		return collectionView
 	}()

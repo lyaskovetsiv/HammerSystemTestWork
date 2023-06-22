@@ -12,6 +12,7 @@ import Foundation
 final class MenuPresenter {
 
 	private weak var view: IMenuView!
+	private var foodItems = 10
 
 	// MARK: - Inits
 
@@ -24,5 +25,8 @@ final class MenuPresenter {
 
 extension MenuPresenter: IMenuPresenter {
 
+	public func getNumberOfFoodItems() -> Int {
+		return foodItems
+	}
 }
 

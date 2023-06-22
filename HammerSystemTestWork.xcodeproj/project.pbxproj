@@ -20,6 +20,9 @@
 		04E9F8402A44AEDB00B42CB5 /* IMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F83F2A44AEDB00B42CB5 /* IMenuView.swift */; };
 		04E9F8422A44AF0F00B42CB5 /* IMenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8412A44AF0F00B42CB5 /* IMenuPresenter.swift */; };
 		04E9F8442A44AFA800B42CB5 /* ModuleAssembley.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8432A44AFA800B42CB5 /* ModuleAssembley.swift */; };
+		04E9F8472A44B3C800B42CB5 /* BannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8462A44B3C800B42CB5 /* BannerCell.swift */; };
+		04E9F8492A44B3D700B42CB5 /* CategoryFoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8482A44B3D700B42CB5 /* CategoryFoodCell.swift */; };
+		04E9F84B2A44B3E600B42CB5 /* IReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F84A2A44B3E600B42CB5 /* IReusableCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +41,9 @@
 		04E9F83F2A44AEDB00B42CB5 /* IMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMenuView.swift; sourceTree = "<group>"; };
 		04E9F8412A44AF0F00B42CB5 /* IMenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMenuPresenter.swift; sourceTree = "<group>"; };
 		04E9F8432A44AFA800B42CB5 /* ModuleAssembley.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleAssembley.swift; sourceTree = "<group>"; };
+		04E9F8462A44B3C800B42CB5 /* BannerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCell.swift; sourceTree = "<group>"; };
+		04E9F8482A44B3D700B42CB5 /* CategoryFoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFoodCell.swift; sourceTree = "<group>"; };
+		04E9F84A2A44B3E600B42CB5 /* IReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IReusableCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +79,7 @@
 				043CCFBC2A444C8C00ED6614 /* Info.plist */,
 				043CCFC22A444CE300ED6614 /* Application */,
 				04E9F8452A44AFAB00B42CB5 /* Assembley */,
+				04E9F84C2A44B3E900B42CB5 /* Protocols */,
 				04E9F8302A444F7B00B42CB5 /* Presentation Layer */,
 			);
 			path = HammerSystemTestWork;
@@ -130,6 +137,8 @@
 			isa = PBXGroup;
 			children = (
 				04E9F8332A44718900B42CB5 /* FoodCell.swift */,
+				04E9F8462A44B3C800B42CB5 /* BannerCell.swift */,
+				04E9F8482A44B3D700B42CB5 /* CategoryFoodCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -158,6 +167,14 @@
 				04E9F8432A44AFA800B42CB5 /* ModuleAssembley.swift */,
 			);
 			path = Assembley;
+			sourceTree = "<group>";
+		};
+		04E9F84C2A44B3E900B42CB5 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				04E9F84A2A44B3E600B42CB5 /* IReusableCell.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,7 +252,10 @@
 				04E9F8342A44718900B42CB5 /* FoodCell.swift in Sources */,
 				04E9F8402A44AEDB00B42CB5 /* IMenuView.swift in Sources */,
 				04E9F83A2A44903800B42CB5 /* SelectTownView.swift in Sources */,
+				04E9F8472A44B3C800B42CB5 /* BannerCell.swift in Sources */,
+				04E9F84B2A44B3E600B42CB5 /* IReusableCell.swift in Sources */,
 				04E9F83D2A44AEAE00B42CB5 /* MenuPresenter.swift in Sources */,
+				04E9F8492A44B3D700B42CB5 /* CategoryFoodCell.swift in Sources */,
 				043CCFB32A444C8A00ED6614 /* MenuViewController.swift in Sources */,
 				04E9F82F2A444EF400B42CB5 /* MainVC.swift in Sources */,
 				04E9F8422A44AF0F00B42CB5 /* IMenuPresenter.swift in Sources */,
