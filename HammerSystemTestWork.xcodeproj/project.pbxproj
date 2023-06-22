@@ -9,19 +9,21 @@
 /* Begin PBXBuildFile section */
 		043CCFAF2A444C8A00ED6614 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CCFAE2A444C8A00ED6614 /* AppDelegate.swift */; };
 		043CCFB12A444C8A00ED6614 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CCFB02A444C8A00ED6614 /* SceneDelegate.swift */; };
-		043CCFB32A444C8A00ED6614 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CCFB22A444C8A00ED6614 /* ViewController.swift */; };
+		043CCFB32A444C8A00ED6614 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CCFB22A444C8A00ED6614 /* MenuViewController.swift */; };
 		043CCFB82A444C8C00ED6614 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 043CCFB72A444C8C00ED6614 /* Assets.xcassets */; };
 		043CCFBB2A444C8C00ED6614 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 043CCFB92A444C8C00ED6614 /* LaunchScreen.storyboard */; };
+		04E9F82F2A444EF400B42CB5 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F82E2A444EF400B42CB5 /* MainVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		043CCFAB2A444C8A00ED6614 /* HammerSystemTestWork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HammerSystemTestWork.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		043CCFAE2A444C8A00ED6614 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		043CCFB02A444C8A00ED6614 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		043CCFB22A444C8A00ED6614 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		043CCFB22A444C8A00ED6614 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		043CCFB72A444C8C00ED6614 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		043CCFBA2A444C8C00ED6614 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		043CCFBC2A444C8C00ED6614 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04E9F82E2A444EF400B42CB5 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +58,7 @@
 			children = (
 				043CCFBC2A444C8C00ED6614 /* Info.plist */,
 				043CCFC22A444CE300ED6614 /* Application */,
-				043CCFC52A444DE300ED6614 /* MainModule */,
+				04E9F8302A444F7B00B42CB5 /* Presentation Layer */,
 			);
 			path = HammerSystemTestWork;
 			sourceTree = "<group>";
@@ -83,17 +85,26 @@
 		043CCFC42A444D5000ED6614 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				043CCFB22A444C8A00ED6614 /* ViewController.swift */,
+				043CCFB22A444C8A00ED6614 /* MenuViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		043CCFC52A444DE300ED6614 /* MainModule */ = {
+		043CCFC52A444DE300ED6614 /* MenuModule */ = {
 			isa = PBXGroup;
 			children = (
 				043CCFC42A444D5000ED6614 /* View */,
 			);
-			path = MainModule;
+			path = MenuModule;
+			sourceTree = "<group>";
+		};
+		04E9F8302A444F7B00B42CB5 /* Presentation Layer */ = {
+			isa = PBXGroup;
+			children = (
+				04E9F82E2A444EF400B42CB5 /* MainVC.swift */,
+				043CCFC52A444DE300ED6614 /* MenuModule */,
+			);
+			path = "Presentation Layer";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,7 +177,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				043CCFB32A444C8A00ED6614 /* ViewController.swift in Sources */,
+				043CCFB32A444C8A00ED6614 /* MenuViewController.swift in Sources */,
+				04E9F82F2A444EF400B42CB5 /* MainVC.swift in Sources */,
 				043CCFAF2A444C8A00ED6614 /* AppDelegate.swift in Sources */,
 				043CCFB12A444C8A00ED6614 /* SceneDelegate.swift in Sources */,
 			);
