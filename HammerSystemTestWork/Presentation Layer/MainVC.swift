@@ -36,6 +36,7 @@ final class MainVC: UITabBarController {
 extension MainVC {
 	private func setupView() {
 		tabBar.tintColor = Constants.selectedVCColor
+		tabBar.backgroundColor = .white
 		setupControllers()
 	}
 
