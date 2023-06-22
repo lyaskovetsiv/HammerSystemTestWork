@@ -14,5 +14,7 @@ protocol IMenuPresenter: AnyObject {
 	func getNumberOfPromo() -> Int
 	func getPromo(by indexPath: IndexPath) -> PromoModel
 	func getCategory(by indexPath: IndexPath) -> CategoryModel
+	func categoryDidTapped(by indexPath: IndexPath)
+	func bannerDidTapped(by indexPath: IndexPath)
 	func getNumberOfCategories() -> Int
 }

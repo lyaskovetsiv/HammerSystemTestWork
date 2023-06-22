@@ -13,13 +13,13 @@ final class CategoryFoodCell: UICollectionViewCell {
 
 	private enum Constants {
 		// Fonts
-		static let mainFont: UIFont = .systemFont(ofSize: 13)
+		static let defaultFont: UIFont = .systemFont(ofSize: 13)
+		static let selectedFont: UIFont = .boldSystemFont(ofSize: 13)
 		// Colors
-		static let mainColor: UIColor = #colorLiteral(red: 0.991042912, green: 0.2283459306, blue: 0.4105762243, alpha: 1)
+		static let mainColor: UIColor = #colorLiteral(red: 0.991042912, green: 0.2283459306, blue: 0.4105762243, alpha: 1).withAlphaComponent(0.3)
 		static let cellBorderWidth: CGFloat = 1
 		// Sizes
 		static let cellCornerRadius: CGFloat = 16
-
 	}
 
 	// MARK: - UI
@@ -27,8 +27,6 @@ final class CategoryFoodCell: UICollectionViewCell {
 	private lazy var titleLabel: UILabel = {
 		let label = UILabel(frame: .zero)
 		label.text = "Категория"
-		label.textColor = Constants.mainColor
-		label.font = Constants.mainFont
 		return label
 	}()
 
@@ -42,16 +40,19 @@ final class CategoryFoodCell: UICollectionViewCell {
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
+
+	// MARK: - Public methods
+
+	public func updateDesign(selected: Bool) {
+		selected ? setupSelectedStyle() : setupDefaultStyle()
+	}
 }
 
 // MARK: - Private methods
 
 extension CategoryFoodCell {
 	private func setupView() {
-		backgroundColor = .clear
-		layer.cornerRadius = Constants.cellCornerRadius
-		layer.borderWidth = Constants.cellBorderWidth
-		layer.borderColor = Constants.mainColor.cgColor
+		setupDefaultStyle()
 		addSubview(titleLabel)
 		setupConstraits()
 	}
@@ -62,6 +63,20 @@ extension CategoryFoodCell {
 			titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
 			titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
 		])
+	}
+
+	private func setupDefaultStyle() {
+		backgroundColor = .clear
+		layer.cornerRadius = Constants.cellCornerRadius
+		layer.borderWidth = Constants.cellBorderWidth
+		layer.borderColor = Constants.mainColor.cgColor
+		titleLabel.textColor = Constants.mainColor.withAlphaComponent(1.0)
+		titleLabel.font = Constants.defaultFont
+	}
+
+	private func setupSelectedStyle() {
+		backgroundColor = Constants.mainColor
+		titleLabel.font = Constants.selectedFont
 	}
 }
 

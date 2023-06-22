@@ -52,4 +52,14 @@ extension MenuPresenter: IMenuPresenter {
 	public func getPromo(by indexPath: IndexPath) -> PromoModel {
 		return promo[indexPath.item]
 	}
+
+	public func categoryDidTapped(by indexPath: IndexPath) {
+		let model = categories[indexPath.item]
+			print("Выбрана категория: \(model.title)")
+	}
+
+	public func bannerDidTapped(by indexPath: IndexPath) {
+		let model = promo[indexPath.item]
+		print("Выбрана акция: \(model.title)")
+	}
 }

@@ -10,5 +10,5 @@ import Foundation
 
 /// Протокол вью Menu модуля
 protocol IMenuView: AnyObject {
-
+	
 }

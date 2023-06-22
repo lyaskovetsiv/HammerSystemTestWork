@@ -18,6 +18,7 @@ class MenuViewController: UIViewController {
 	private enum Constants {
 		// Colors
 		static let mainBackgroundColor: UIColor = .white
+		static let separatorColor: UIColor = #colorLiteral(red: 0.9487603307, green: 0.9565995336, blue: 0.9732769132, alpha: 1)
 		// Sizes
 		static let heightForRow: CGFloat = 170
 		static let menuHeaderViewHeight: CGFloat = 260
@@ -41,10 +42,13 @@ class MenuViewController: UIViewController {
 	private lazy var menuTableView: UITableView = {
 		let tableView = UITableView(frame: .zero)
 		tableView.backgroundColor = .white
+		tableView.separatorStyle = .none
 		tableView.showsVerticalScrollIndicator = false
 		tableView.register(FoodCell.self, forCellReuseIdentifier: FoodCell.identifier)
 		return tableView
 	}()
+
+	private var selectedIndexPath: IndexPath?
 
 	// MARK: - LifeCycleOfVC
 
@@ -95,6 +99,18 @@ extension MenuViewController {
 	private func setupHeaderView() {
 		let menuHeaderView = MenuHeaderView(frame: CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: Constants.menuHeaderViewHeight)))
 		menuTableView.tableHeaderView = menuHeaderView
+	}
+
+	private func updateCellDesign(collectionView: UICollectionView, indexPath: IndexPath, selected: Bool) {
+		if let cell = collectionView.cellForItem(at: indexPath) as? CategoryFoodCell {
+			cell.updateDesign(selected: selected)
+		}
+	}
+
+	private func createCustomSeparator() -> UIView {
+		let separator = UIView(frame: CGRect(x: 0, y: 0, width: menuTableView.frame.width, height: 1.0))
+		separator.backgroundColor = Constants.separatorColor
+		return separator
 	}
 }
 
@@ -193,14 +209,31 @@ extension MenuViewController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		switch collectionView {
 		case menuHeaderView.bannerCollectionView:
-			if let model = presenter?.getPromo(by: indexPath) {
-				print("Выбрана акция: \(model.title)")
-			}
+			presenter?.bannerDidTapped(by: indexPath)
 		case menuHeaderView.categoriesCollectionView:
-			if let model = presenter?.getCategory(by: indexPath) {
-				print("Выбрана категория: \(model.title)")
+			presenter?.categoryDidTapped(by: indexPath)
+			if let selectedIndexPath = selectedIndexPath {
+				updateCellDesign(collectionView: menuHeaderView.categoriesCollectionView,
+								 indexPath: selectedIndexPath,
+								 selected: false)
 			}
+			updateCellDesign(collectionView: menuHeaderView.categoriesCollectionView,
+							 indexPath: indexPath,
+							 selected: true)
+			selectedIndexPath = indexPath
 		default: break
+		}
+	}
+
+	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+		if indexPath.row != tableView.numberOfRows(inSection: indexPath.section) - 1 {
+			let separator = createCustomSeparator()
+			cell.addSubview(separator)
+			separator.translatesAutoresizingMaskIntoConstraints = false
+			separator.leadingAnchor.constraint(equalTo: cell.leadingAnchor).isActive = true
+			separator.trailingAnchor.constraint(equalTo: cell.trailingAnchor).isActive = true
+			separator.bottomAnchor.constraint(equalTo: cell.bottomAnchor).isActive = true
+			separator.heightAnchor.constraint(equalToConstant: 2).isActive = true
 		}
 	}
 }
