@@ -23,7 +23,15 @@ class MenuViewController: UIViewController {
 
 	// MARK: - UI
 
-	private var menuHeaderView: MenuHeaderView!
+	private var selectTownView: SelectTownView = {
+		let view = SelectTownView()
+		return view
+	}()
+
+	private var menuHeaderView: MenuHeaderView = {
+		let view = MenuHeaderView()
+		return view
+	}()
 
 	private lazy var menuTableView: UITableView = {
 		let tableView = UITableView(frame: .zero)
@@ -48,18 +56,33 @@ class MenuViewController: UIViewController {
 extension MenuViewController {
 	private func setupView() {
 		view.backgroundColor = Constants.mainBackgroundColor
-		setupHeaderView()
+		view.addSubview(selectTownView)
+		view.addSubview(menuHeaderView)
 		view.addSubview(menuTableView)
 		setupConstraits()
 	}
 
 	private func setupConstraits() {
+		selectTownView.translatesAutoresizingMaskIntoConstraints = false
+		NSLayoutConstraint.activate([
+			selectTownView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+			selectTownView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+			selectTownView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+		])
+
+		menuHeaderView.translatesAutoresizingMaskIntoConstraints = false
+		NSLayoutConstraint.activate([
+			menuHeaderView.topAnchor.constraint(equalTo: selectTownView.bottomAnchor),
+			menuHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+			menuHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+		])
+
 		menuTableView.translatesAutoresizingMaskIntoConstraints = false
 		NSLayoutConstraint.activate([
+			menuTableView.topAnchor.constraint(equalTo: menuHeaderView.bottomAnchor),
 			menuTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
 			menuTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
 			menuTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-			menuTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
 		])
 	}
 
@@ -96,3 +119,26 @@ extension MenuViewController: UITableViewDelegate {
 	}
 }
 
+extension MenuViewController: UIScrollViewDelegate {
+
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		let y = scrollView.contentOffset.y
+		let isSwipingDown = y <= 0
+		let snappingAllowed = y > 30
+
+		// Спрятать коллекцию с баннерами
+		UIView.animate(withDuration: 0.3) {
+			let value = isSwipingDown ? 1.0 : 0
+			self.menuHeaderView.changeBannersCollectionViewAlpha(value: value)
+		}
+
+		// Удалить коллекцию с баннерами
+		// Пересчитать констреиты
+		// topAnchor у menuHeader дожна быть у categories
+		UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.3,
+													   delay: 0) {
+			self.view.layoutIfNeeded()
+		}
+
+	}
+}
