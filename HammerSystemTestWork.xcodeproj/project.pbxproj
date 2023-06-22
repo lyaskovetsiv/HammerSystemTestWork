@@ -14,6 +14,7 @@
 		043CCFBB2A444C8C00ED6614 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 043CCFB92A444C8C00ED6614 /* LaunchScreen.storyboard */; };
 		04E9F82F2A444EF400B42CB5 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F82E2A444EF400B42CB5 /* MainVC.swift */; };
 		04E9F8322A44684700B42CB5 /* MenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8312A44684700B42CB5 /* MenuHeaderView.swift */; };
+		04E9F8342A44718900B42CB5 /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8332A44718900B42CB5 /* FoodCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		043CCFBC2A444C8C00ED6614 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04E9F82E2A444EF400B42CB5 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		04E9F8312A44684700B42CB5 /* MenuHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHeaderView.swift; sourceTree = "<group>"; };
+		04E9F8332A44718900B42CB5 /* FoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +89,8 @@
 		043CCFC42A444D5000ED6614 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				04E9F8312A44684700B42CB5 /* MenuHeaderView.swift */,
+				04E9F8352A44732B00B42CB5 /* Cells */,
+				04E9F8362A44733B00B42CB5 /* Other */,
 				043CCFB22A444C8A00ED6614 /* MenuViewController.swift */,
 			);
 			path = View;
@@ -108,6 +111,22 @@
 				043CCFC52A444DE300ED6614 /* MenuModule */,
 			);
 			path = "Presentation Layer";
+			sourceTree = "<group>";
+		};
+		04E9F8352A44732B00B42CB5 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				04E9F8332A44718900B42CB5 /* FoodCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		04E9F8362A44733B00B42CB5 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				04E9F8312A44684700B42CB5 /* MenuHeaderView.swift */,
+			);
+			path = Other;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +200,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04E9F8322A44684700B42CB5 /* MenuHeaderView.swift in Sources */,
+				04E9F8342A44718900B42CB5 /* FoodCell.swift in Sources */,
 				043CCFB32A444C8A00ED6614 /* MenuViewController.swift in Sources */,
 				04E9F82F2A444EF400B42CB5 /* MainVC.swift in Sources */,
 				043CCFAF2A444C8A00ED6614 /* AppDelegate.swift in Sources */,

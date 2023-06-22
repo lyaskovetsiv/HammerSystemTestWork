@@ -11,17 +11,26 @@ import UIKit
 /// Класс headerView таблицы в Menu модуле
 final class MenuHeaderView: UIView {
 
-	static let indentifier = "testHeader"
-
 	// MARK: - Private constants
 
 	private enum Constants {
-		static let mainBackgroundColor: UIColor = #colorLiteral(red: 0.9487603307, green: 0.9565995336, blue: 0.9732769132, alpha: 1)
-		static let selectedTownSpacing: CGFloat = 8
+		// Fonts
 		static let mainTextFont: UIFont = .systemFont(ofSize: 17)
+		// Colors
+		static let mainBackgroundColor: UIColor = #colorLiteral(red: 0.9487603307, green: 0.9565995336, blue: 0.9732769132, alpha: 1)
+		// Sizes
+		static let selectedTownSpacing: CGFloat = 8
+		static let bannerCollecitonViewHeight: CGFloat = 112
+		static let categoriesCollectionViewHeight: CGFloat = 32
+		// Images
 		static let downArrowImage: UIImage? = UIImage(named: "downArrayIcon")
-		static let selectTownStackViewTopAnchor: CGFloat = 16
-		static let selectTownStackViewLeadingAnchor: CGFloat = 16
+		// Constraits
+		static let selectTownStackViewTopAnchorConstant: CGFloat = 16
+		static let selectTownStackViewLeadingAnchorConstant: CGFloat = 16
+		static let bannerCollecitonViewTopAnchorConstant: CGFloat  = 25
+		static let bannerCollecitonViewLeadingAnchorConstant: CGFloat  = 16
+		static let categoriesCollectionViewTopAnchorConstant: CGFloat = 25
+		static let categoriesCollectionViewLeadingAnchorConstant: CGFloat = 16
 	}
 
 	// MARK: - UI
@@ -68,6 +77,7 @@ final class MenuHeaderView: UIView {
 }
 
 // MARK: - Private methods
+
 extension MenuHeaderView {
 	private func setupView() {
 		backgroundColor = Constants.mainBackgroundColor
@@ -81,23 +91,23 @@ extension MenuHeaderView {
 	private func setupConstraits() {
 		selectTownStackView.translatesAutoresizingMaskIntoConstraints = false
 		NSLayoutConstraint.activate([
-			selectTownStackView.topAnchor.constraint(equalTo: topAnchor, constant: Constants.selectTownStackViewTopAnchor),
-			selectTownStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.selectTownStackViewLeadingAnchor)
+			selectTownStackView.topAnchor.constraint(equalTo: topAnchor, constant: Constants.selectTownStackViewTopAnchorConstant),
+			selectTownStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.selectTownStackViewLeadingAnchorConstant)
 		])
 
 		bannerCollecitonView.translatesAutoresizingMaskIntoConstraints = false
 		NSLayoutConstraint.activate([
-			bannerCollecitonView.topAnchor.constraint(equalTo: selectTownStackView.bottomAnchor, constant: 25),
-			bannerCollecitonView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-			bannerCollecitonView.heightAnchor.constraint(equalToConstant: 112),
+			bannerCollecitonView.topAnchor.constraint(equalTo: selectTownStackView.bottomAnchor, constant: Constants.bannerCollecitonViewTopAnchorConstant),
+			bannerCollecitonView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.bannerCollecitonViewLeadingAnchorConstant),
+			bannerCollecitonView.heightAnchor.constraint(equalToConstant: Constants.bannerCollecitonViewHeight),
 			bannerCollecitonView.widthAnchor.constraint(equalToConstant: bounds.size.width)
 		])
 
 		categoriesCollectionView.translatesAutoresizingMaskIntoConstraints = false
 		NSLayoutConstraint.activate([
-			categoriesCollectionView.topAnchor.constraint(equalTo: bannerCollecitonView.bottomAnchor, constant: 25),
-			categoriesCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-			categoriesCollectionView.heightAnchor.constraint(equalToConstant: 32),
+			categoriesCollectionView.topAnchor.constraint(equalTo: bannerCollecitonView.bottomAnchor, constant: Constants.categoriesCollectionViewTopAnchorConstant),
+			categoriesCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.categoriesCollectionViewLeadingAnchorConstant),
+			categoriesCollectionView.heightAnchor.constraint(equalToConstant: Constants.categoriesCollectionViewHeight),
 			categoriesCollectionView.widthAnchor.constraint(equalToConstant: bounds.size.width)
 		])
 	}

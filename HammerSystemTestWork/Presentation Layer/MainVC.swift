@@ -22,7 +22,6 @@ final class MainVC: UITabBarController {
 		static let selectedVCColor: UIColor = #colorLiteral(red: 0.991042912, green: 0.2283459306, blue: 0.4105762243, alpha: 1)
 	}
 
-
 	// MARK: - LifeCycleOfVC
 
 	override func viewDidLoad() {

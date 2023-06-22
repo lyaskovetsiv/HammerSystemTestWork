@@ -14,8 +14,11 @@ class MenuViewController: UIViewController {
 	// MARK: - Private constants
 
 	private enum Constants {
+		// Colors
 		static let mainBackgroundColor: UIColor = .white
+		// Sizes
 		static let heightForRow: CGFloat = 170
+		static let menuHeaderViewHeight: CGFloat = 260
 	}
 
 	// MARK: - UI
@@ -26,7 +29,7 @@ class MenuViewController: UIViewController {
 		let tableView = UITableView(frame: .zero)
 		tableView.backgroundColor = .white
 		tableView.showsVerticalScrollIndicator = false
-		tableView.register(UITableViewCell.self, forCellReuseIdentifier: "testCell")
+		tableView.register(FoodCell.self, forCellReuseIdentifier: FoodCell.indentifier)
 		return tableView
 	}()
 
@@ -40,39 +43,12 @@ class MenuViewController: UIViewController {
 	}
 }
 
-// MARK: - UITableViewDataSource
-
-extension MenuViewController: UITableViewDataSource {
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 10
-	}
-
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "testCell", for: indexPath)
-		return cell
-	}
-}
-
-// MARK: - UITableViewDelegate
-
-extension MenuViewController: UITableViewDelegate {
-	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return Constants.heightForRow
-	}
-
-	func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-		tableView.deselectRow(at: indexPath, animated: true)
-	}
-}
-
 // MARK: - Private methods
 
 extension MenuViewController {
 	private func setupView() {
 		view.backgroundColor = Constants.mainBackgroundColor
-		let menuHeaderView = MenuHeaderView(frame: CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: 260)))
-		menuTableView.tableHeaderView = menuHeaderView
-
+		setupHeaderView()
 		view.addSubview(menuTableView)
 		setupConstraits()
 	}
@@ -86,4 +62,37 @@ extension MenuViewController {
 			menuTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
 		])
 	}
+
+	private func setupHeaderView() {
+		let menuHeaderView = MenuHeaderView(frame: CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: Constants.menuHeaderViewHeight)))
+		menuTableView.tableHeaderView = menuHeaderView
+	}
 }
+
+// MARK: - UITableViewDataSource
+
+extension MenuViewController: UITableViewDataSource {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return 10
+	}
+
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: FoodCell.indentifier, for: indexPath) as? FoodCell else {
+			return UITableViewCell()
+		}
+		return cell
+	}
+}
+
+// MARK: - UITableViewDelegate
+
+extension MenuViewController: UITableViewDelegate {
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		return Constants.heightForRow
+	}
+
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
+	}
+}
+
