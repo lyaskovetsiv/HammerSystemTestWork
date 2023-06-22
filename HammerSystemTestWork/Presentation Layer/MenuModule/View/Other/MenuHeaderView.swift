@@ -8,7 +8,7 @@
 import UIKit
 
 
-/// Класс headerView таблицы в Menu модуле
+/// Класс  вью с категориями блюд и акциями в Menu модуле
 final class MenuHeaderView: UIView {
 
 	// MARK: - Private constants
@@ -79,8 +79,7 @@ final class MenuHeaderView: UIView {
 		NSLayoutConstraint.deactivate(bannersConstraits)
 		// Пересчитать констреит у Categories
 		categoriesCollectionViewTopAnchor?.isActive = false
-		categoriesCollectionViewTopAnchor = categoriesCollectionView.topAnchor.constraint(equalTo: topAnchor,
-																						  constant: Constants.categoriesCollectionViewTopAnchorConstant)
+		categoriesCollectionViewTopAnchor = categoriesCollectionView.topAnchor.constraint(equalTo: topAnchor, constant: Constants.categoriesCollectionViewTopAnchorConstant)
 		categoriesCollectionViewTopAnchor?.isActive = true
 	}
 
@@ -90,8 +89,7 @@ final class MenuHeaderView: UIView {
 		NSLayoutConstraint.activate(bannersConstraits)
 		// Пересчитать констреит у Categories
 		categoriesCollectionViewTopAnchor?.isActive = false
-		categoriesCollectionViewTopAnchor = categoriesCollectionView.topAnchor.constraint(equalTo: bannerCollectionView.bottomAnchor,
-																						  constant: Constants.categoriesCollectionViewTopAnchorConstant)
+		categoriesCollectionViewTopAnchor = categoriesCollectionView.topAnchor.constraint(equalTo: bannerCollectionView.bottomAnchor,constant: Constants.categoriesCollectionViewTopAnchorConstant)
 		categoriesCollectionViewTopAnchor?.isActive = true
 	}
 

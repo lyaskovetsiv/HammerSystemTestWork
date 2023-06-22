@@ -14,6 +14,9 @@ final class BannerCell: UICollectionViewCell {
 	// MARK: - Private constants
 
 	private enum Constants {
+		// Sizes
+		static let imageCorderRadius: CGFloat = 8
+		// Images 
 		static let textBannerImage: UIImage? = nil
 	}
 
@@ -23,7 +26,7 @@ final class BannerCell: UICollectionViewCell {
 		let imageView = UIImageView(image: Constants.textBannerImage)
 		imageView.contentMode = .scaleAspectFit
 		imageView.backgroundColor = .gray
-		imageView.layer.cornerRadius = 8
+		imageView.layer.cornerRadius = Constants.imageCorderRadius
 		return imageView
 	}()
 

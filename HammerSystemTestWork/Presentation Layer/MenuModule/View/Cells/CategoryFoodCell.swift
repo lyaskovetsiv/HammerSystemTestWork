@@ -12,8 +12,14 @@ import UIKit
 final class CategoryFoodCell: UICollectionViewCell {
 
 	private enum Constants {
-		static let mainColor: UIColor = #colorLiteral(red: 0.991042912, green: 0.2283459306, blue: 0.4105762243, alpha: 1)
+		// Fonts
 		static let mainFont: UIFont = .systemFont(ofSize: 13)
+		// Colors
+		static let mainColor: UIColor = #colorLiteral(red: 0.991042912, green: 0.2283459306, blue: 0.4105762243, alpha: 1)
+		static let cellBorderWidth: CGFloat = 1
+		// Sizes
+		static let cellCornerRadius: CGFloat = 16
+
 	}
 
 	// MARK: - Inits
@@ -41,8 +47,8 @@ final class CategoryFoodCell: UICollectionViewCell {
 extension CategoryFoodCell {
 	private func setupView() {
 		backgroundColor = .clear
-		layer.cornerRadius = 16
-		layer.borderWidth = 1
+		layer.cornerRadius = Constants.cellCornerRadius
+		layer.borderWidth = Constants.cellBorderWidth
 		layer.borderColor = Constants.mainColor.cgColor
 		addSubview(titleLabel)
 		setupConstraits()

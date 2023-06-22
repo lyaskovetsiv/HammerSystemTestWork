@@ -8,6 +8,7 @@
 import UIKit
 
 
+/// Класс вью с выбором года в Menu модуле
 final class SelectTownView: UIView {
 
 	// MARK: - Private constants
@@ -19,11 +20,13 @@ final class SelectTownView: UIView {
 		static let mainBackgroundColor: UIColor = #colorLiteral(red: 0.9487603307, green: 0.9565995336, blue: 0.9732769132, alpha: 1)
 		// Sizes
 		static let selectedTownSpacing: CGFloat = 8
+		static let selectTownStackViewHeight: CGFloat = 60
 		// Images
 		static let downArrowImage: UIImage? = UIImage(named: "downArrayIcon")
 		// Constraits
 		static let selectTownStackViewTopAnchorConstant: CGFloat = 16
 		static let selectTownStackViewLeadingAnchorConstant: CGFloat = 16
+		static let selectTownStackViewBottomAnchorConstant: CGFloat = 16
 	}
 
 	// MARK: - UI
@@ -70,8 +73,8 @@ extension SelectTownView {
 		NSLayoutConstraint.activate([
 			selectTownStackView.topAnchor.constraint(equalTo: topAnchor, constant: Constants.selectTownStackViewTopAnchorConstant),
 			selectTownStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.selectTownStackViewLeadingAnchorConstant),
-			selectTownStackView.heightAnchor.constraint(equalToConstant: 60),
-			selectTownStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 16)
+			selectTownStackView.heightAnchor.constraint(equalToConstant: Constants.selectTownStackViewHeight),
+			selectTownStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Constants.selectTownStackViewBottomAnchorConstant)
 		])
 	}
 
