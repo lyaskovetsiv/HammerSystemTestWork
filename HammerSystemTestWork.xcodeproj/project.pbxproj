@@ -107,9 +107,9 @@
 		043CCFC42A444D5000ED6614 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				04E9F84F2A44B7CB00B42CB5 /* Protocols */,
 				04E9F8352A44732B00B42CB5 /* Cells */,
 				04E9F83B2A44AE7100B42CB5 /* Other */,
-				04E9F83F2A44AEDB00B42CB5 /* IMenuView.swift */,
 				043CCFB22A444C8A00ED6614 /* MenuViewController.swift */,
 			);
 			path = View;
@@ -173,6 +173,14 @@
 			isa = PBXGroup;
 			children = (
 				04E9F84A2A44B3E600B42CB5 /* IReusableCell.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		04E9F84F2A44B7CB00B42CB5 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				04E9F83F2A44AEDB00B42CB5 /* IMenuView.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";

@@ -141,7 +141,6 @@ extension MenuViewController: UITableViewDelegate {
 	}
 }
 
-
 // MARK: - IMenuView
 
 extension MenuViewController: IMenuView {
