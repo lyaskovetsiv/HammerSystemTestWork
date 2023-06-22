@@ -23,6 +23,7 @@
 		04E9F8472A44B3C800B42CB5 /* BannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8462A44B3C800B42CB5 /* BannerCell.swift */; };
 		04E9F8492A44B3D700B42CB5 /* CategoryFoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8482A44B3D700B42CB5 /* CategoryFoodCell.swift */; };
 		04E9F84B2A44B3E600B42CB5 /* IReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F84A2A44B3E600B42CB5 /* IReusableCell.swift */; };
+		04E9F8512A44B90200B42CB5 /* MenuHeaderViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8502A44B90200B42CB5 /* MenuHeaderViewDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		04E9F8462A44B3C800B42CB5 /* BannerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCell.swift; sourceTree = "<group>"; };
 		04E9F8482A44B3D700B42CB5 /* CategoryFoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFoodCell.swift; sourceTree = "<group>"; };
 		04E9F84A2A44B3E600B42CB5 /* IReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IReusableCell.swift; sourceTree = "<group>"; };
+		04E9F8502A44B90200B42CB5 /* MenuHeaderViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHeaderViewDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				04E9F83F2A44AEDB00B42CB5 /* IMenuView.swift */,
+				04E9F8502A44B90200B42CB5 /* MenuHeaderViewDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 			files = (
 				04E9F8322A44684700B42CB5 /* MenuHeaderView.swift in Sources */,
 				04E9F8442A44AFA800B42CB5 /* ModuleAssembley.swift in Sources */,
+				04E9F8512A44B90200B42CB5 /* MenuHeaderViewDelegate.swift in Sources */,
 				04E9F8342A44718900B42CB5 /* FoodCell.swift in Sources */,
 				04E9F8402A44AEDB00B42CB5 /* IMenuView.swift in Sources */,
 				04E9F83A2A44903800B42CB5 /* SelectTownView.swift in Sources */,

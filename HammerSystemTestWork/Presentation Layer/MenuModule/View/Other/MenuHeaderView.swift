@@ -27,23 +27,27 @@ final class MenuHeaderView: UIView {
 		static let categoriesCollectionViewBottomAnchorConstant: CGFloat = -24
 	}
 
+	weak var delegate: MenuHeaderViewDelegate?
+
 	// MARK: - UI
 
-	private lazy var bannerCollecitonView: UICollectionView = {
+	private(set) lazy var bannerCollectionView: UICollectionView = {
 		let layout = UICollectionViewFlowLayout()
 		layout.scrollDirection = .horizontal
 		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+		collectionView.showsHorizontalScrollIndicator = false
 		collectionView.register(BannerCell.self, forCellWithReuseIdentifier: BannerCell.identifier)
-		collectionView.backgroundColor = .green
+		collectionView.backgroundColor = .clear
 		return collectionView
 	}()
 
-	private lazy var categoriesCollectionView: UICollectionView = {
+	private(set) lazy var categoriesCollectionView: UICollectionView = {
 		let layout = UICollectionViewFlowLayout()
 		layout.scrollDirection = .horizontal
 		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 		collectionView.register(CategoryFoodCell.self, forCellWithReuseIdentifier: CategoryFoodCell.identifier)
-		collectionView.backgroundColor = .red
+		collectionView.showsHorizontalScrollIndicator = false
+		collectionView.backgroundColor = .clear
 		return collectionView
 	}()
 
@@ -66,7 +70,7 @@ final class MenuHeaderView: UIView {
 	/// Метод вью, для изменения параметра alpha у bannersCollectionView
 	/// - Parameter value: Значение alpha
 	public func changeBannersCollectionViewAlpha(value: CGFloat) {
-		bannerCollecitonView.alpha = value
+		bannerCollectionView.alpha = value
 	}
 
 	/// Метод вью, для его сжатия и скрытия  bannersCollectionView
@@ -86,9 +90,16 @@ final class MenuHeaderView: UIView {
 		NSLayoutConstraint.activate(bannersConstraits)
 		// Пересчитать констреит у Categories
 		categoriesCollectionViewTopAnchor?.isActive = false
-		categoriesCollectionViewTopAnchor = categoriesCollectionView.topAnchor.constraint(equalTo: bannerCollecitonView.bottomAnchor,
+		categoriesCollectionViewTopAnchor = categoriesCollectionView.topAnchor.constraint(equalTo: bannerCollectionView.bottomAnchor,
 																						  constant: Constants.categoriesCollectionViewTopAnchorConstant)
 		categoriesCollectionViewTopAnchor?.isActive = true
+	}
+
+	public func configureDataSourceAndDelegate(with vc: UICollectionViewDataSource&UICollectionViewDelegate) {
+		bannerCollectionView.dataSource = vc
+		bannerCollectionView.delegate = vc
+		categoriesCollectionView.dataSource = vc
+		categoriesCollectionView.delegate = vc
 	}
 }
 
@@ -97,26 +108,26 @@ final class MenuHeaderView: UIView {
 extension MenuHeaderView {
 	private func setupView() {
 		backgroundColor = Constants.mainBackgroundColor
-		addSubview(bannerCollecitonView)
+		addSubview(bannerCollectionView)
 		addSubview(categoriesCollectionView)
 		setupConstraits()
 	}
 
 	private func setupConstraits() {
 		// Banners
-		bannerCollecitonView.translatesAutoresizingMaskIntoConstraints = false
+		bannerCollectionView.translatesAutoresizingMaskIntoConstraints = false
 		bannersConstraits = [
-			bannerCollecitonView.topAnchor.constraint(equalTo: topAnchor,
+			bannerCollectionView.topAnchor.constraint(equalTo: topAnchor,
 													  constant: Constants.bannerCollecitonViewTopAnchorConstant),
-			bannerCollecitonView.leadingAnchor.constraint(equalTo: leadingAnchor,
+			bannerCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor,
 														  constant: Constants.bannerCollecitonViewLeadingAnchorConstant),
-			bannerCollecitonView.trailingAnchor.constraint(equalTo: trailingAnchor),
-			bannerCollecitonView.heightAnchor.constraint(equalToConstant: Constants.bannerCollecitonViewHeight)
+			bannerCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+			bannerCollectionView.heightAnchor.constraint(equalToConstant: Constants.bannerCollecitonViewHeight)
 		]
 		NSLayoutConstraint.activate(bannersConstraits)
 		// Categories
 		categoriesCollectionView.translatesAutoresizingMaskIntoConstraints = false
-		categoriesCollectionViewTopAnchor = categoriesCollectionView.topAnchor.constraint(equalTo: bannerCollecitonView.bottomAnchor,
+		categoriesCollectionViewTopAnchor = categoriesCollectionView.topAnchor.constraint(equalTo: bannerCollectionView.bottomAnchor,
 																						  constant: Constants.categoriesCollectionViewTopAnchorConstant)
 		NSLayoutConstraint.activate([
 			categoriesCollectionViewTopAnchor,

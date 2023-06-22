@@ -48,6 +48,7 @@ class MenuViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupView()
+		menuHeaderView.configureDataSourceAndDelegate(with: self)
 		menuTableView.delegate = self
 		menuTableView.dataSource = self
 	}
@@ -145,4 +146,50 @@ extension MenuViewController: UITableViewDelegate {
 
 extension MenuViewController: IMenuView {
 
+}
+
+
+extension MenuViewController: UICollectionViewDataSource {
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		if collectionView == menuHeaderView.bannerCollectionView{
+			return 2
+		}
+
+		if collectionView == menuHeaderView.categoriesCollectionView {
+			return 4
+		}
+		return 0
+	}
+
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		if collectionView == menuHeaderView.bannerCollectionView {
+			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BannerCell.identifier, for: indexPath) as? BannerCell else {
+				return UICollectionViewCell()
+			}
+			return cell
+		}
+		if collectionView == menuHeaderView.categoriesCollectionView {
+			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryFoodCell.identifier, for: indexPath) as? CategoryFoodCell else {
+				return UICollectionViewCell()
+			}
+			return cell
+		}
+		return UICollectionViewCell()
+	}
+}
+
+extension MenuViewController: UICollectionViewDelegateFlowLayout {
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+		if collectionView == menuHeaderView.bannerCollectionView {
+			return CGSize(width: 300, height: 122)
+		}
+		if collectionView == menuHeaderView.categoriesCollectionView {
+			return CGSize(width: 95, height: 32)
+		}
+		return CGSize(width: 0, height: 0)
+	}
+
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+		return 16
+	}
 }
