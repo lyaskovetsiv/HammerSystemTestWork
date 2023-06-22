@@ -69,7 +69,7 @@ extension MenuViewController: UITableViewDelegate {
 extension MenuViewController {
 	private func setupView() {
 		view.backgroundColor = Constants.mainBackgroundColor
-		let menuHeaderView = MenuHeaderView(frame: CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: 300)))
+		let menuHeaderView = MenuHeaderView(frame: CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: 260)))
 		menuTableView.tableHeaderView = menuHeaderView
 
 		view.addSubview(menuTableView)

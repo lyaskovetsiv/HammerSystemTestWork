@@ -41,6 +41,20 @@ final class MenuHeaderView: UIView {
 
 	private var selectTownStackView: UIStackView!
 
+	private lazy var bannerCollecitonView: UICollectionView = {
+		let layout = UICollectionViewFlowLayout()
+		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+		collectionView.backgroundColor = .green
+		return collectionView
+	}()
+
+	private lazy var categoriesCollectionView: UICollectionView = {
+		let layout = UICollectionViewFlowLayout()
+		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+		collectionView.backgroundColor = .red
+		return collectionView
+	}()
+
 	// MARK: - Inits
 
 	override init(frame: CGRect) {
@@ -59,7 +73,10 @@ extension MenuHeaderView {
 		backgroundColor = Constants.mainBackgroundColor
 		setupTownStackView()
 
+
 		addSubview(selectTownStackView)
+		addSubview(bannerCollecitonView)
+		addSubview(categoriesCollectionView)
 		setupConstraits()
 	}
 
@@ -68,6 +85,22 @@ extension MenuHeaderView {
 		NSLayoutConstraint.activate([
 			selectTownStackView.topAnchor.constraint(equalTo: topAnchor, constant: Constants.selectTownStackViewTopAnchor),
 			selectTownStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.selectTownStackViewLeadingAnchor)
+		])
+
+		bannerCollecitonView.translatesAutoresizingMaskIntoConstraints = false
+		NSLayoutConstraint.activate([
+			bannerCollecitonView.topAnchor.constraint(equalTo: selectTownStackView.bottomAnchor, constant: 25),
+			bannerCollecitonView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+			bannerCollecitonView.heightAnchor.constraint(equalToConstant: 112),
+			bannerCollecitonView.widthAnchor.constraint(equalToConstant: bounds.size.width)
+		])
+
+		categoriesCollectionView.translatesAutoresizingMaskIntoConstraints = false
+		NSLayoutConstraint.activate([
+			categoriesCollectionView.topAnchor.constraint(equalTo: bannerCollecitonView.bottomAnchor, constant: 25),
+			categoriesCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+			categoriesCollectionView.heightAnchor.constraint(equalToConstant: 32),
+			categoriesCollectionView.widthAnchor.constraint(equalToConstant: bounds.size.width)
 		])
 	}
 
