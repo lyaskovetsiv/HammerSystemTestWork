@@ -107,6 +107,9 @@ extension MenuViewController: UITableViewDataSource {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: FoodCell.identifier, for: indexPath) as? FoodCell else {
 			return UITableViewCell()
 		}
+		if let model = presenter?.getFood(by: indexPath) {
+			cell.configure(with: model)
+		}
 		return cell
 	}
 }
@@ -150,7 +153,7 @@ extension MenuViewController: UICollectionViewDataSource {
 		if collectionView == menuHeaderView.bannerCollectionView {
 			return presenter?.getNumberOfPromo() ?? 0
 		} else if collectionView == menuHeaderView.categoriesCollectionView {
-			return 4
+			return presenter?.getNumberOfCategories() ?? 0
 		}
 		return 0
 	}
@@ -159,8 +162,7 @@ extension MenuViewController: UICollectionViewDataSource {
 		if collectionView == menuHeaderView.bannerCollectionView {
 			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BannerCell.identifier, for: indexPath) as? BannerCell else {
 				return UICollectionViewCell()
-
-				}
+			}
 			if let model = presenter?.getPromo(by: indexPath) {
 				cell.configure(with: model)
 			}
@@ -168,6 +170,9 @@ extension MenuViewController: UICollectionViewDataSource {
 		} else if collectionView == menuHeaderView.categoriesCollectionView {
 			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryFoodCell.identifier, for: indexPath) as? CategoryFoodCell else {
 				return UICollectionViewCell()
+			}
+			if let model = presenter?.getCategory(by: indexPath) {
+				cell.configure(with: model)
 			}
 			return cell
 		}
@@ -196,7 +201,11 @@ extension MenuViewController: UICollectionViewDelegateFlowLayout {
 
 extension MenuViewController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+		if collectionView == menuHeaderView.bannerCollectionView {
+			print("Promo tapped")
+		} else if collectionView == menuHeaderView.categoriesCollectionView {
+			print("Category tapped")
+		}
 	}
 }
 

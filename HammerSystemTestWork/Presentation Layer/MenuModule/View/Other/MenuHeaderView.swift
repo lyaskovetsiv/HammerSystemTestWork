@@ -48,6 +48,7 @@ final class MenuHeaderView: UIView {
 		collectionView.register(CategoryFoodCell.self, forCellWithReuseIdentifier: CategoryFoodCell.identifier)
 		collectionView.showsHorizontalScrollIndicator = false
 		collectionView.backgroundColor = .clear
+		collectionView.isUserInteractionEnabled = true
 		return collectionView
 	}()
 

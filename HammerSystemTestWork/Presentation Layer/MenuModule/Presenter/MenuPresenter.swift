@@ -12,7 +12,8 @@ import Foundation
 final class MenuPresenter {
 
 	private weak var view: IMenuView!
-	private var foodItems = 10
+	private var food: [FoodModel] = FoodModel.getMockData()
+	private var categories: [CategoryModel] = CategoryModel.getMockData()
 	private var promo: [PromoModel] = PromoModel.getMockData()
 
 	// MARK: - Inits
@@ -27,15 +28,26 @@ final class MenuPresenter {
 extension MenuPresenter: IMenuPresenter {
 
 	public func getNumberOfFoodItems() -> Int {
-		return foodItems
+		return food.count
 	}
 
-	func getNumberOfPromo() -> Int {
+	public func getFood(by indexPath: IndexPath) -> FoodModel {
+		return food[indexPath.row]
+	}
+
+	public func getNumberOfCategories() -> Int {
+		return categories.count
+	}
+
+	public func getCategory(by indexPath: IndexPath) -> CategoryModel {
+		return categories[indexPath.item]
+	}
+
+	public func getNumberOfPromo() -> Int {
 		return promo.count
 	}
 	
-	func getPromo(by indexPath: IndexPath) -> PromoModel {
+	public func getPromo(by indexPath: IndexPath) -> PromoModel {
 		return promo[indexPath.item]
 	}
 }
-

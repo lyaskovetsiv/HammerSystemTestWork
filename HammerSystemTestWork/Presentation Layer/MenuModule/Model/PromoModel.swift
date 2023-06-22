@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 
+
+/// Модель рекламной кампании
 struct PromoModel {
 	let id: UUID
 	let banner: UIImage?

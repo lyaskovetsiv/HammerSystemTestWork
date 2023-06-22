@@ -22,7 +22,7 @@ final class CategoryFoodCell: UICollectionViewCell {
 
 	}
 
-	// MARK: - Inits
+	// MARK: - UI
 
 	private lazy var titleLabel: UILabel = {
 		let label = UILabel(frame: .zero)
@@ -31,7 +31,9 @@ final class CategoryFoodCell: UICollectionViewCell {
 		label.font = Constants.mainFont
 		return label
 	}()
-	
+
+	// MARK: - Inits
+
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		setupView()
@@ -68,5 +70,19 @@ extension CategoryFoodCell {
 extension CategoryFoodCell: IReusableCell {
 	static var identifier: String {
 		return "categoryFoodCell"
+	}
+}
+
+// MARK: - IConfurableCell
+
+extension CategoryFoodCell: IConfurableCell {
+	typealias ConfigurationModel = CategoryModel
+	/// Метод настройки ячейки
+	/// - Parameter model: Модель типа CategoryModel
+	public func configure(with model: CategoryModel) {
+		// Clear cell
+		titleLabel.text = ""
+		// Configure cell
+		titleLabel.text = model.title
 	}
 }

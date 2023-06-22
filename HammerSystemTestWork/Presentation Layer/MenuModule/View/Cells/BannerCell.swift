@@ -41,12 +41,7 @@ final class BannerCell: UICollectionViewCell {
 
 	// MARK: - Public methods
 
-	public func configure(with model: PromoModel) {
-		// Clear cell
-		bannerImageView.image = nil
-		// Configure cell
-		bannerImageView.image = model.banner
-	}
+
 }
 
 // MARK: - Private methods
@@ -73,5 +68,19 @@ extension BannerCell {
 extension BannerCell: IReusableCell {
 	static var identifier: String {
 		return "bannerCell"
+	}
+}
+
+// MARK: - IConfurableCell
+
+extension BannerCell: IConfurableCell {
+	typealias ConfigurationModel = PromoModel
+	/// Метод настройки ячейки
+	/// - Parameter model: Модель типа PromoModel
+	public func configure(with model: PromoModel) {
+		// Clear cell
+		bannerImageView.image = nil
+		// Configure cell
+		bannerImageView.image = model.banner
 	}
 }

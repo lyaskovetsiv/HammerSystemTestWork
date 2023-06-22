@@ -147,3 +147,23 @@ extension FoodCell: IReusableCell {
 		return "foodCell"
 	}
 }
+
+// MARK: - IConfurableCell
+
+extension FoodCell: IConfurableCell {
+	typealias ConfigurationModel = FoodModel
+	/// Метод настройки ячейки
+	/// - Parameter model: Модель типа PromoModel
+	public func configure(with model: FoodModel) {
+		// Clear cell
+		titleLabel.text = ""
+		descriptionLabel.text = ""
+		foodImageView.image = nil
+		buyBtn.setTitle("", for: .normal)
+		// Configure cell
+		titleLabel.text = model.title
+		descriptionLabel.text = model.decription
+		foodImageView.image = model.image
+		buyBtn.setTitle("от \(model.price) р", for: .normal)
+	}
+}
