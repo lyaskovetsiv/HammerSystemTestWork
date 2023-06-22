@@ -39,8 +39,13 @@ final class FoodCell: UITableViewCell {
 
 	private lazy var foodImageView: UIImageView = {
 		let imageView = UIImageView()
-		imageView.backgroundColor = .blue
 		return imageView
+	}()
+
+	private lazy var activityIndicator: UIActivityIndicatorView = {
+		let view = UIActivityIndicatorView(frame: .zero)
+		view.isHidden = true
+		return view
 	}()
 
 	private lazy var titleLabel: UILabel = {
@@ -96,6 +101,7 @@ extension FoodCell {
 		composeView.addSubview(titleLabel)
 		composeView.addSubview(descriptionLabel)
 		composeView.addSubview(buyBtn)
+		foodImageView.addSubview(activityIndicator)
 		setupConstraits()
 	}
 
@@ -137,6 +143,12 @@ extension FoodCell {
 			buyBtn.trailingAnchor.constraint(equalTo: composeView.trailingAnchor),
 			buyBtn.bottomAnchor.constraint(equalTo: composeView.bottomAnchor),
 		])
+
+		activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+		NSLayoutConstraint.activate([
+			activityIndicator.centerXAnchor.constraint(equalTo: foodImageView.centerXAnchor),
+			activityIndicator.centerYAnchor.constraint(equalTo: foodImageView.centerYAnchor)
+		])
 	}
 }
 
@@ -163,7 +175,12 @@ extension FoodCell: IConfurableCell {
 		// Configure cell
 		titleLabel.text = model.title
 		descriptionLabel.text = model.decription
-		foodImageView.image = model.image
 		buyBtn.setTitle("от \(model.price) р", for: .normal)
+		guard let image = model.image else {
+			activityIndicator.isHidden = false
+			activityIndicator.startAnimating()
+			return
+		}
+		foodImageView.image = image
 	}
 }
