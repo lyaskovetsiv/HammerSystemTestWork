@@ -28,6 +28,12 @@ final class BannerCell: UICollectionViewCell {
 		return imageView
 	}()
 
+	private lazy var activityIndicator: UIActivityIndicatorView = {
+		let view = UIActivityIndicatorView(frame: .zero)
+		view.isHidden = true
+		return view
+	}()
+
 	// MARK: - Inits
 
 	override init(frame: CGRect) {
@@ -38,10 +44,6 @@ final class BannerCell: UICollectionViewCell {
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
-
-	// MARK: - Public methods
-
-
 }
 
 // MARK: - Private methods
@@ -49,6 +51,7 @@ final class BannerCell: UICollectionViewCell {
 extension BannerCell {
 	private func setupView() {
 		addSubview(bannerImageView)
+		bannerImageView.addSubview(activityIndicator)
 		setupConstraits()
 	}
 
@@ -59,6 +62,12 @@ extension BannerCell {
 			bannerImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
 			bannerImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
 			bannerImageView.trailingAnchor.constraint(equalTo: trailingAnchor)
+		])
+
+		activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+		NSLayoutConstraint.activate([
+			activityIndicator.centerXAnchor.constraint(equalTo: bannerImageView.centerXAnchor),
+			activityIndicator.centerYAnchor.constraint(equalTo: bannerImageView.centerYAnchor),
 		])
 	}
 }
@@ -81,6 +90,11 @@ extension BannerCell: IConfurableCell {
 		// Clear cell
 		bannerImageView.image = nil
 		// Configure cell
-		bannerImageView.image = model.banner
+		guard let image = model.banner else {
+			activityIndicator.isHidden = false
+			activityIndicator.startAnimating()
+			return
+		}
+		bannerImageView.image = image
 	}
 }
