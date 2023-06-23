@@ -12,6 +12,12 @@
 		043CCFB32A444C8A00ED6614 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CCFB22A444C8A00ED6614 /* MenuViewController.swift */; };
 		043CCFB82A444C8C00ED6614 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 043CCFB72A444C8C00ED6614 /* Assets.xcassets */; };
 		043CCFBB2A444C8C00ED6614 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 043CCFB92A444C8C00ED6614 /* LaunchScreen.storyboard */; };
+		0443A7EC2A459D6C009ABA9C /* RemoteDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443A7EB2A459D6C009ABA9C /* RemoteDataService.swift */; };
+		0443A7F02A459D85009ABA9C /* IRemoteDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443A7EF2A459D85009ABA9C /* IRemoteDataService.swift */; };
+		0443A7F32A45A21C009ABA9C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443A7F22A45A21C009ABA9C /* NetworkService.swift */; };
+		0443A7F62A45A27A009ABA9C /* INetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443A7F52A45A27A009ABA9C /* INetworkService.swift */; };
+		0443A7F92A45A2DE009ABA9C /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443A7F82A45A2DE009ABA9C /* ServiceAssembly.swift */; };
+		048D61B22A457BC900E52E67 /* MockDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D61B12A457BC900E52E67 /* MockDataService.swift */; };
 		04E9F82F2A444EF400B42CB5 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F82E2A444EF400B42CB5 /* MainVC.swift */; };
 		04E9F8322A44684700B42CB5 /* MenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8312A44684700B42CB5 /* MenuHeaderView.swift */; };
 		04E9F8342A44718900B42CB5 /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8332A44718900B42CB5 /* FoodCell.swift */; };
@@ -19,7 +25,7 @@
 		04E9F83D2A44AEAE00B42CB5 /* MenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F83C2A44AEAE00B42CB5 /* MenuPresenter.swift */; };
 		04E9F8402A44AEDB00B42CB5 /* IMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F83F2A44AEDB00B42CB5 /* IMenuView.swift */; };
 		04E9F8422A44AF0F00B42CB5 /* IMenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8412A44AF0F00B42CB5 /* IMenuPresenter.swift */; };
-		04E9F8442A44AFA800B42CB5 /* ModuleAssembley.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8432A44AFA800B42CB5 /* ModuleAssembley.swift */; };
+		04E9F8442A44AFA800B42CB5 /* ModuleAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8432A44AFA800B42CB5 /* ModuleAssembly.swift */; };
 		04E9F8472A44B3C800B42CB5 /* BannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8462A44B3C800B42CB5 /* BannerCell.swift */; };
 		04E9F8492A44B3D700B42CB5 /* CategoryFoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8482A44B3D700B42CB5 /* CategoryFoodCell.swift */; };
 		04E9F84B2A44B3E600B42CB5 /* IReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F84A2A44B3E600B42CB5 /* IReusableCell.swift */; };
@@ -38,6 +44,12 @@
 		043CCFB72A444C8C00ED6614 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		043CCFBA2A444C8C00ED6614 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		043CCFBC2A444C8C00ED6614 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0443A7EB2A459D6C009ABA9C /* RemoteDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataService.swift; sourceTree = "<group>"; };
+		0443A7EF2A459D85009ABA9C /* IRemoteDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IRemoteDataService.swift; sourceTree = "<group>"; };
+		0443A7F22A45A21C009ABA9C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		0443A7F52A45A27A009ABA9C /* INetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INetworkService.swift; sourceTree = "<group>"; };
+		0443A7F82A45A2DE009ABA9C /* ServiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
+		048D61B12A457BC900E52E67 /* MockDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataService.swift; sourceTree = "<group>"; };
 		04E9F82E2A444EF400B42CB5 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		04E9F8312A44684700B42CB5 /* MenuHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHeaderView.swift; sourceTree = "<group>"; };
 		04E9F8332A44718900B42CB5 /* FoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
@@ -45,7 +57,7 @@
 		04E9F83C2A44AEAE00B42CB5 /* MenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPresenter.swift; sourceTree = "<group>"; };
 		04E9F83F2A44AEDB00B42CB5 /* IMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMenuView.swift; sourceTree = "<group>"; };
 		04E9F8412A44AF0F00B42CB5 /* IMenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMenuPresenter.swift; sourceTree = "<group>"; };
-		04E9F8432A44AFA800B42CB5 /* ModuleAssembley.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleAssembley.swift; sourceTree = "<group>"; };
+		04E9F8432A44AFA800B42CB5 /* ModuleAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleAssembly.swift; sourceTree = "<group>"; };
 		04E9F8462A44B3C800B42CB5 /* BannerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCell.swift; sourceTree = "<group>"; };
 		04E9F8482A44B3D700B42CB5 /* CategoryFoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFoodCell.swift; sourceTree = "<group>"; };
 		04E9F84A2A44B3E600B42CB5 /* IReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IReusableCell.swift; sourceTree = "<group>"; };
@@ -88,8 +100,10 @@
 			children = (
 				043CCFBC2A444C8C00ED6614 /* Info.plist */,
 				043CCFC22A444CE300ED6614 /* Application */,
-				04E9F8452A44AFAB00B42CB5 /* Assembley */,
+				04E9F8452A44AFAB00B42CB5 /* Assembly */,
 				04E9F85D2A44DE4B00B42CB5 /* Helpers */,
+				0443A7F42A45A21F009ABA9C /* Core Layer */,
+				0443A7EE2A459D76009ABA9C /* ServiceLayer */,
 				04E9F8302A444F7B00B42CB5 /* Presentation Layer */,
 			);
 			path = HammerSystemTestWork;
@@ -135,6 +149,49 @@
 			path = MenuModule;
 			sourceTree = "<group>";
 		};
+		0443A7ED2A459D6E009ABA9C /* RemoteDataService */ = {
+			isa = PBXGroup;
+			children = (
+				0443A7F12A459F1C009ABA9C /* Mock */,
+				0443A7EF2A459D85009ABA9C /* IRemoteDataService.swift */,
+				0443A7EB2A459D6C009ABA9C /* RemoteDataService.swift */,
+			);
+			path = RemoteDataService;
+			sourceTree = "<group>";
+		};
+		0443A7EE2A459D76009ABA9C /* ServiceLayer */ = {
+			isa = PBXGroup;
+			children = (
+				0443A7ED2A459D6E009ABA9C /* RemoteDataService */,
+			);
+			path = ServiceLayer;
+			sourceTree = "<group>";
+		};
+		0443A7F12A459F1C009ABA9C /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				048D61B12A457BC900E52E67 /* MockDataService.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		0443A7F42A45A21F009ABA9C /* Core Layer */ = {
+			isa = PBXGroup;
+			children = (
+				0443A7F72A45A284009ABA9C /* NetworkService */,
+			);
+			path = "Core Layer";
+			sourceTree = "<group>";
+		};
+		0443A7F72A45A284009ABA9C /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				0443A7F52A45A27A009ABA9C /* INetworkService.swift */,
+				0443A7F22A45A21C009ABA9C /* NetworkService.swift */,
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
 		04E9F8302A444F7B00B42CB5 /* Presentation Layer */ = {
 			isa = PBXGroup;
 			children = (
@@ -171,12 +228,13 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
-		04E9F8452A44AFAB00B42CB5 /* Assembley */ = {
+		04E9F8452A44AFAB00B42CB5 /* Assembly */ = {
 			isa = PBXGroup;
 			children = (
-				04E9F8432A44AFA800B42CB5 /* ModuleAssembley.swift */,
+				04E9F8432A44AFA800B42CB5 /* ModuleAssembly.swift */,
+				0443A7F82A45A2DE009ABA9C /* ServiceAssembly.swift */,
 			);
-			path = Assembley;
+			path = Assembly;
 			sourceTree = "<group>";
 		};
 		04E9F84C2A44B3E900B42CB5 /* Protocols */ = {
@@ -311,21 +369,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				04E9F8322A44684700B42CB5 /* MenuHeaderView.swift in Sources */,
-				04E9F8442A44AFA800B42CB5 /* ModuleAssembley.swift in Sources */,
+				04E9F8442A44AFA800B42CB5 /* ModuleAssembly.swift in Sources */,
+				0443A7F32A45A21C009ABA9C /* NetworkService.swift in Sources */,
 				04E9F8512A44B90200B42CB5 /* MenuHeaderViewDelegate.swift in Sources */,
 				04E9F8342A44718900B42CB5 /* FoodCell.swift in Sources */,
 				04E9F8562A44D54100B42CB5 /* CategoryModel.swift in Sources */,
+				048D61B22A457BC900E52E67 /* MockDataService.swift in Sources */,
 				04E9F8402A44AEDB00B42CB5 /* IMenuView.swift in Sources */,
 				04E9F83A2A44903800B42CB5 /* SelectTownView.swift in Sources */,
+				0443A7F02A459D85009ABA9C /* IRemoteDataService.swift in Sources */,
 				04E9F8472A44B3C800B42CB5 /* BannerCell.swift in Sources */,
 				04E9F84B2A44B3E600B42CB5 /* IReusableCell.swift in Sources */,
+				0443A7F92A45A2DE009ABA9C /* ServiceAssembly.swift in Sources */,
 				04E9F85A2A44D81B00B42CB5 /* FoodModel.swift in Sources */,
 				04E9F83D2A44AEAE00B42CB5 /* MenuPresenter.swift in Sources */,
 				04E9F8532A44CB7500B42CB5 /* PromoModel.swift in Sources */,
+				0443A7EC2A459D6C009ABA9C /* RemoteDataService.swift in Sources */,
 				04E9F8492A44B3D700B42CB5 /* CategoryFoodCell.swift in Sources */,
 				04E9F8582A44D69900B42CB5 /* IConfurableCell.swift in Sources */,
 				043CCFB32A444C8A00ED6614 /* MenuViewController.swift in Sources */,
 				04E9F82F2A444EF400B42CB5 /* MainVC.swift in Sources */,
+				0443A7F62A45A27A009ABA9C /* INetworkService.swift in Sources */,
 				04E9F8422A44AF0F00B42CB5 /* IMenuPresenter.swift in Sources */,
 				043CCFAF2A444C8A00ED6614 /* AppDelegate.swift in Sources */,
 				043CCFB12A444C8A00ED6614 /* SceneDelegate.swift in Sources */,

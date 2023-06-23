@@ -40,7 +40,7 @@ extension FoodModel {
 					  title: "Пицца четыре сыра",
 					  decription: "Соус Карбонара, Сыр Моцарелла, Сыр Пармезан, и многое другое",
 					  image: nil,
-					  price: 345),
+					  price: 345)
 		]
 	}
 }

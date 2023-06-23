@@ -12,15 +12,5 @@ import Foundation
 struct CategoryModel {
 	let id: UUID
 	let title: String
-}
-
-extension CategoryModel {
-	static func getMockData() -> [CategoryModel] {
-		return [
-			CategoryModel(id: UUID(), title: "Пицца"),
-			CategoryModel(id: UUID(), title: "Комбо"),
-			CategoryModel(id: UUID(), title: "Десерты"),
-			CategoryModel(id: UUID(), title: "Напитки"),
-		]
-	}
+	let foods: [FoodModel]
 }

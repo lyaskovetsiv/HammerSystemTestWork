@@ -13,15 +13,49 @@ final class MenuPresenter {
 
 	// MARK: - Private properties
 
+
+
 	private weak var view: IMenuView!
+	private var remoteDataService: IRemoteDataService!
+
+	private var promo: [PromoModel] = []
 	private var food: [FoodModel] = FoodModel.getMockData()
-	private var categories: [CategoryModel] = CategoryModel.getMockData()
-	private var promo: [PromoModel] = PromoModel.getMockData()
+	private var data: [CategoryModel] = []
 
 	// MARK: - Inits
 
-	init(view: IMenuView) {
+	init(view: IMenuView, remoteDataService: IRemoteDataService) {
 		self.view = view
+		self.remoteDataService = remoteDataService
+		fetchMockData()
+	}
+}
+
+extension MenuPresenter {
+	private func fetchMockData() {
+		remoteDataService.fetchCategories(completion: { [weak self] result in
+			switch result {
+			case .success(let categories):
+				self?.data = categories
+				DispatchQueue.main.async {
+					self?.view.reloadUI()
+				}
+			case .failure(_):
+				print("Error")
+			}
+		})
+
+		remoteDataService.fetchPromos { [weak self] result in
+			switch result {
+			case .success(let promos):
+				self?.promo = promos
+				DispatchQueue.main.async {
+					self?.view.reloadUI()
+				}
+			case .failure(_):
+				print("Error")
+			}
+		}
 	}
 }
 
@@ -53,20 +87,20 @@ extension MenuPresenter: IMenuPresenter {
 	/// Метод презентера, возвращающий количество категорий с блюдами
 	/// - Returns: Количество категорий
 	public func getNumberOfCategories() -> Int {
-		return categories.count
+		return data.count
 	}
 
 	/// Метод презентера, позволяющий получить конкретную категорию
 	/// - Parameter indexPath: Индекс ячейки
 	/// - Returns: Модель CategoryModel
 	public func getCategory(by indexPath: IndexPath) -> CategoryModel {
-		return categories[indexPath.item]
+		return data[indexPath.item]
 	}
 
 	/// Метод презентера, обрабатывающий нажатие по ячейке с категорией
 	/// - Parameter indexPath: Индекс ячейки
 	public func categoryDidTapped(by indexPath: IndexPath) {
-		let model = categories[indexPath.item]
+		let model = data[indexPath.item]
 		print("Выбрана категория: \(model.title)")
 	}
 

@@ -260,5 +260,10 @@ extension MenuViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - IMenuView
 
 extension MenuViewController: IMenuView {
-
+	/// Метод вью, отвечающий за перезагрузку UI
+	public func reloadUI() {
+		menuTableView.reloadData()
+		menuHeaderView.bannerCollectionView.reloadData()
+		menuHeaderView.categoriesCollectionView.reloadData()
+	}
 }
