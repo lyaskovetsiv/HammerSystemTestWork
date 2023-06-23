@@ -13,15 +13,14 @@ final class MenuPresenter {
 
 	// MARK: - Private properties
 
-
-
 	private weak var view: IMenuView!
 	private var remoteDataService: IRemoteDataService!
 	private var localDataService: ILocalDataService!
 
-	private var promo: [PromoModel] = []
-	private var food: [FoodModel] = FoodModel.getMockData()
 	private var data: [CategoryModel] = []
+	private var promo: [PromoModel] = []
+	// ???
+	private var food: [FoodModel] = FoodModel.getMockData()
 
 	// MARK: - Inits
 
@@ -45,7 +44,7 @@ extension MenuPresenter {
 					self?.view.reloadUI()
 				}
 			case .failure(_):
-				print("Error")
+				print("Some Error")
 			}
 		})
 
@@ -57,10 +56,12 @@ extension MenuPresenter {
 					self?.view.reloadUI()
 				}
 			case .failure(_):
-				print("Error")
+				print("Some Error")
 			}
 		}
 	}
+
+	
 }
 
 // MARK: - IMenuPresenter
