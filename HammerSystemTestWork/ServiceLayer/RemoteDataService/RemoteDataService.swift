@@ -13,6 +13,8 @@ final class RemoteDataService: IRemoteDataService {
 
 	private var networkService: INetworkService!
 
+	// MARK: - Init
+
 	init(networkService: INetworkService) {
 		self.networkService = networkService
 	}

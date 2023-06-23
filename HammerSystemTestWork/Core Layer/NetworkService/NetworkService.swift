@@ -8,7 +8,7 @@
 import Foundation
 
 
-/// Класс сетевого сервиса
+/// Класс, отвечающий за работу с сетью
 final class NetworkService: INetworkService {
 	// Здесь будет вся низкоуровневая работа с сетью (URLSession и прочее)
 }

@@ -20,7 +20,9 @@ final class ModuleAssembly {
 	/// - Returns: Экземпляр MenuViewController
 	static func createMenuModule() -> MenuViewController {
 		let view = MenuViewController()
-		let presenter: IMenuPresenter = MenuPresenter(view: view, remoteDataService: serviceAssembly.getRemoteDataService())
+		let presenter: IMenuPresenter = MenuPresenter(view: view,
+													  remoteDataService: serviceAssembly.getRemoteDataService(),
+													  localDataService: serviceAssembly.getLocalDataService())
 		view.presenter = presenter
 		return view
 	}

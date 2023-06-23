@@ -17,6 +17,7 @@ final class MenuPresenter {
 
 	private weak var view: IMenuView!
 	private var remoteDataService: IRemoteDataService!
+	private var localDataService: ILocalDataService!
 
 	private var promo: [PromoModel] = []
 	private var food: [FoodModel] = FoodModel.getMockData()
@@ -24,9 +25,12 @@ final class MenuPresenter {
 
 	// MARK: - Inits
 
-	init(view: IMenuView, remoteDataService: IRemoteDataService) {
+	init(view: IMenuView,
+		 remoteDataService: IRemoteDataService,
+		 localDataService: ILocalDataService) {
 		self.view = view
 		self.remoteDataService = remoteDataService
+		self.localDataService = localDataService
 		fetchMockData()
 	}
 }

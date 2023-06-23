@@ -17,6 +17,10 @@
 		0443A7F32A45A21C009ABA9C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443A7F22A45A21C009ABA9C /* NetworkService.swift */; };
 		0443A7F62A45A27A009ABA9C /* INetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443A7F52A45A27A009ABA9C /* INetworkService.swift */; };
 		0443A7F92A45A2DE009ABA9C /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443A7F82A45A2DE009ABA9C /* ServiceAssembly.swift */; };
+		0443A7FB2A45A55A009ABA9C /* LocaDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443A7FA2A45A55A009ABA9C /* LocaDataService.swift */; };
+		0443A7FE2A45A580009ABA9C /* ILocalDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443A7FD2A45A580009ABA9C /* ILocalDataService.swift */; };
+		0443A8002A45A5D9009ABA9C /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443A7FF2A45A5D9009ABA9C /* CoreDataService.swift */; };
+		0443A8032A45A5E9009ABA9C /* ICoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443A8022A45A5E9009ABA9C /* ICoreDataService.swift */; };
 		048D61B22A457BC900E52E67 /* MockDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D61B12A457BC900E52E67 /* MockDataService.swift */; };
 		04E9F82F2A444EF400B42CB5 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F82E2A444EF400B42CB5 /* MainVC.swift */; };
 		04E9F8322A44684700B42CB5 /* MenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8312A44684700B42CB5 /* MenuHeaderView.swift */; };
@@ -49,6 +53,10 @@
 		0443A7F22A45A21C009ABA9C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		0443A7F52A45A27A009ABA9C /* INetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INetworkService.swift; sourceTree = "<group>"; };
 		0443A7F82A45A2DE009ABA9C /* ServiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
+		0443A7FA2A45A55A009ABA9C /* LocaDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaDataService.swift; sourceTree = "<group>"; };
+		0443A7FD2A45A580009ABA9C /* ILocalDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ILocalDataService.swift; sourceTree = "<group>"; };
+		0443A7FF2A45A5D9009ABA9C /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		0443A8022A45A5E9009ABA9C /* ICoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICoreDataService.swift; sourceTree = "<group>"; };
 		048D61B12A457BC900E52E67 /* MockDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataService.swift; sourceTree = "<group>"; };
 		04E9F82E2A444EF400B42CB5 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		04E9F8312A44684700B42CB5 /* MenuHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHeaderView.swift; sourceTree = "<group>"; };
@@ -131,9 +139,9 @@
 		043CCFC42A444D5000ED6614 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				04E9F84F2A44B7CB00B42CB5 /* Protocols */,
 				04E9F8352A44732B00B42CB5 /* Cells */,
 				04E9F83B2A44AE7100B42CB5 /* Other */,
+				04E9F84F2A44B7CB00B42CB5 /* Protocols */,
 				043CCFB22A444C8A00ED6614 /* MenuViewController.swift */,
 			);
 			path = View;
@@ -163,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				0443A7ED2A459D6E009ABA9C /* RemoteDataService */,
+				0443A7FC2A45A55D009ABA9C /* LocalDataService */,
 			);
 			path = ServiceLayer;
 			sourceTree = "<group>";
@@ -179,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				0443A7F72A45A284009ABA9C /* NetworkService */,
+				0443A8012A45A5DC009ABA9C /* CoreDataService */,
 			);
 			path = "Core Layer";
 			sourceTree = "<group>";
@@ -190,6 +200,24 @@
 				0443A7F22A45A21C009ABA9C /* NetworkService.swift */,
 			);
 			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		0443A7FC2A45A55D009ABA9C /* LocalDataService */ = {
+			isa = PBXGroup;
+			children = (
+				0443A7FD2A45A580009ABA9C /* ILocalDataService.swift */,
+				0443A7FA2A45A55A009ABA9C /* LocaDataService.swift */,
+			);
+			path = LocalDataService;
+			sourceTree = "<group>";
+		};
+		0443A8012A45A5DC009ABA9C /* CoreDataService */ = {
+			isa = PBXGroup;
+			children = (
+				0443A8022A45A5E9009ABA9C /* ICoreDataService.swift */,
+				0443A7FF2A45A5D9009ABA9C /* CoreDataService.swift */,
+			);
+			path = CoreDataService;
 			sourceTree = "<group>";
 		};
 		04E9F8302A444F7B00B42CB5 /* Presentation Layer */ = {
@@ -222,7 +250,7 @@
 		04E9F83E2A44AEBA00B42CB5 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				04E9F85E2A44DE8400B42CB5 /* Protocols */,
+				04E9F8412A44AF0F00B42CB5 /* IMenuPresenter.swift */,
 				04E9F83C2A44AEAE00B42CB5 /* MenuPresenter.swift */,
 			);
 			path = Presenter;
@@ -288,14 +316,6 @@
 				04E9F84C2A44B3E900B42CB5 /* Protocols */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		04E9F85E2A44DE8400B42CB5 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				04E9F8412A44AF0F00B42CB5 /* IMenuPresenter.swift */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -368,8 +388,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0443A8002A45A5D9009ABA9C /* CoreDataService.swift in Sources */,
+				0443A7FE2A45A580009ABA9C /* ILocalDataService.swift in Sources */,
 				04E9F8322A44684700B42CB5 /* MenuHeaderView.swift in Sources */,
 				04E9F8442A44AFA800B42CB5 /* ModuleAssembly.swift in Sources */,
+				0443A7FB2A45A55A009ABA9C /* LocaDataService.swift in Sources */,
 				0443A7F32A45A21C009ABA9C /* NetworkService.swift in Sources */,
 				04E9F8512A44B90200B42CB5 /* MenuHeaderViewDelegate.swift in Sources */,
 				04E9F8342A44718900B42CB5 /* FoodCell.swift in Sources */,
@@ -380,6 +403,7 @@
 				0443A7F02A459D85009ABA9C /* IRemoteDataService.swift in Sources */,
 				04E9F8472A44B3C800B42CB5 /* BannerCell.swift in Sources */,
 				04E9F84B2A44B3E600B42CB5 /* IReusableCell.swift in Sources */,
+				0443A8032A45A5E9009ABA9C /* ICoreDataService.swift in Sources */,
 				0443A7F92A45A2DE009ABA9C /* ServiceAssembly.swift in Sources */,
 				04E9F85A2A44D81B00B42CB5 /* FoodModel.swift in Sources */,
 				04E9F83D2A44AEAE00B42CB5 /* MenuPresenter.swift in Sources */,
