@@ -180,6 +180,10 @@ extension MenuViewController: UITableViewDelegate {
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		hideAndSnapHeaderView(scrollView: scrollView)
 
+		guard menuTableView.isDragging else {
+			return
+		}
+
 		let visibleIndexPath = menuTableView.indexPathsForVisibleRows ?? []
 		guard let firstVisibleIndexPath = visibleIndexPath.first else {
 			return
