@@ -19,12 +19,13 @@ class MenuViewController: UIViewController {
 		// Colors
 		static let mainBackgroundColor: UIColor = .white
 		static let separatorColor: UIColor = #colorLiteral(red: 0.9487603307, green: 0.9565995336, blue: 0.9732769132, alpha: 1)
+		static let tableViewBackgroundColor: UIColor = .white
 		// Sizes
 		static let heightForRow: CGFloat = 170
 		static let menuHeaderViewHeight: CGFloat = 260
 		static let minimumInteritemSpacingForSection: CGFloat = 16
 		static let sizeForBannerCell: CGSize = CGSize(width: 300, height: 122)
-		static let suzeForCategoryCell: CGSize = CGSize(width: 95, height: 32)
+		static let sizeForCategoryCell: CGSize = CGSize(width: 95, height: 32)
 	}
 
 	// MARK: - UI
@@ -41,7 +42,7 @@ class MenuViewController: UIViewController {
 
 	private lazy var menuTableView: UITableView = {
 		let tableView = UITableView(frame: .zero)
-		tableView.backgroundColor = .white
+		tableView.backgroundColor = Constants.tableViewBackgroundColor
 		tableView.separatorStyle = .none
 		tableView.showsVerticalScrollIndicator = false
 		tableView.register(FoodCell.self, forCellReuseIdentifier: FoodCell.identifier)
@@ -96,11 +97,6 @@ extension MenuViewController {
 		])
 	}
 
-	private func setupHeaderView() {
-		let menuHeaderView = MenuHeaderView(frame: CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: Constants.menuHeaderViewHeight)))
-		menuTableView.tableHeaderView = menuHeaderView
-	}
-
 	private func updateCellDesign(collectionView: UICollectionView, indexPath: IndexPath, selected: Bool) {
 		if let cell = collectionView.cellForItem(at: indexPath) as? CategoryFoodCell {
 			cell.updateDesign(selected: selected)
@@ -153,9 +149,7 @@ extension MenuViewController: UITableViewDelegate {
 
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
-		if let model = presenter?.getFood(by: indexPath) {
-			print("В корзину добавлен товар: \(model.title)")
-		}
+		presenter?.foodDidTapped(by: indexPath)
 	}
 
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -252,7 +246,7 @@ extension MenuViewController: UICollectionViewDelegateFlowLayout {
 		case menuHeaderView.bannerCollectionView:
 			return Constants.sizeForBannerCell
 		case menuHeaderView.categoriesCollectionView:
-			return Constants.suzeForCategoryCell
+			return Constants.sizeForCategoryCell
 		default: break
 		}
 		return CGSize.zero
