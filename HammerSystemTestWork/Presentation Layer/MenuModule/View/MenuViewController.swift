@@ -60,6 +60,11 @@ class MenuViewController: UIViewController {
 		menuTableView.delegate = self
 		menuTableView.dataSource = self
 	}
+
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		presenter?.viewDidAppear()
+	}
 }
 
 // MARK: - Private methods
@@ -103,7 +108,7 @@ extension MenuViewController {
 		}
 	}
 
-	private func proceedCategoryTapCell(indexPath: IndexPath) {
+	private func processChangeCellUI(indexPath: IndexPath) {
 		if let selectedIndexPath = selectedCategoryIndexPath {
 			updateCellDesign(collectionView: menuHeaderView.categoriesCollectionView,
 							 indexPath: selectedIndexPath,
@@ -119,6 +124,26 @@ extension MenuViewController {
 		let separator = UIView(frame: CGRect(x: 0, y: 0, width: menuTableView.frame.width, height: 1.0))
 		separator.backgroundColor = Constants.separatorColor
 		return separator
+	}
+
+	private func hideAndSnapHeaderView(scrollView: UIScrollView) {
+		let y = scrollView.contentOffset.y
+		let isSwipingDown = y <= 0
+		let snappingAllowed = y > 1
+
+		UIView.animate(withDuration: 0.3) {
+			let value = isSwipingDown ? 1.0 : 0
+			self.menuHeaderView.changeBannersCollectionViewAlpha(value: value)
+		}
+
+		UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.3, delay: 0) {
+			if snappingAllowed {
+				self.menuHeaderView.compressMenuHeaderView()
+			} else {
+				self.menuHeaderView.uncompressMenuHeaderView()
+			}
+			self.view.layoutIfNeeded()
+		}
 	}
 }
 
@@ -153,23 +178,13 @@ extension MenuViewController: UITableViewDelegate {
 	}
 
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		let y = scrollView.contentOffset.y
-		let isSwipingDown = y <= 0
-		let snappingAllowed = y > 1
+		hideAndSnapHeaderView(scrollView: scrollView)
 
-		UIView.animate(withDuration: 0.3) {
-			let value = isSwipingDown ? 1.0 : 0
-			self.menuHeaderView.changeBannersCollectionViewAlpha(value: value)
+		let visibleIndexPath = menuTableView.indexPathsForVisibleRows ?? []
+		guard let firstVisibleIndexPath = visibleIndexPath.first else {
+			return
 		}
-
-		UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.3, delay: 0) {
-			if snappingAllowed {
-				self.menuHeaderView.compressMenuHeaderView()
-			} else {
-				self.menuHeaderView.uncompressMenuHeaderView()
-			}
-			self.view.layoutIfNeeded()
-		}
+		presenter?.tableViewDidScroll(indexPath: firstVisibleIndexPath)
 	}
 }
 
@@ -218,7 +233,7 @@ extension MenuViewController: UICollectionViewDelegate {
 			presenter?.bannerDidTapped(by: indexPath)
 		case menuHeaderView.categoriesCollectionView:
 			presenter?.categoryDidTapped(by: indexPath)
-			proceedCategoryTapCell(indexPath: indexPath)
+			processChangeCellUI(indexPath: indexPath)
 		default: break
 		}
 	}
@@ -269,5 +284,11 @@ extension MenuViewController: IMenuView {
 	/// - Parameter indexPath: Индекс ячейки
 	public func scrollTableViewTo(indexPath: IndexPath) {
 		menuTableView.scrollToRow(at: indexPath, at: .top, animated: true)
+	}
+
+	/// Метод вью, отвечающий за выделение ячейки с категорией при скроллинге таблицы
+	/// - Parameter indexPath: Индекс ячейки
+	public func selectCellFromCollectionView(indexPath: IndexPath) {
+		processChangeCellUI(indexPath: indexPath)
 	}
 }

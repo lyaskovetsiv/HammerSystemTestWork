@@ -18,4 +18,6 @@ protocol IMenuPresenter: AnyObject {
 	func getNumberOfPromo() -> Int
 	func getPromo(by indexPath: IndexPath) -> PromoModel
 	func bannerDidTapped(by indexPath: IndexPath)
+	func tableViewDidScroll(indexPath: IndexPath)
+	func viewDidAppear()
 }

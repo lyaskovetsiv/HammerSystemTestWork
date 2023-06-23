@@ -12,4 +12,5 @@ import Foundation
 protocol IMenuView: AnyObject {
 	func reloadUI()
 	func scrollTableViewTo(indexPath: IndexPath)
+	func selectCellFromCollectionView(indexPath: IndexPath)
 }

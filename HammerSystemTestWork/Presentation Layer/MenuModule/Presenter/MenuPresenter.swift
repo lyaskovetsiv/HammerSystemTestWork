@@ -146,4 +146,29 @@ extension MenuPresenter: IMenuPresenter {
 		let model = promo[indexPath.item]
 		print("Выбрана акция: \(model.title)")
 	}
+
+	/// Метод презентера, отслеживающий скролл таблицы
+	/// - Parameter indexPath: Индекс первой видимой ячейки
+	public func tableViewDidScroll(indexPath: IndexPath) {
+		// Найти элемент во flat array блюд
+		let array = test.flatMap { $0 }
+		let food = array[indexPath.row]
+		// Найти элемент в списке с категориями и вернуть индекс категории
+		let indexCategory = test.firstIndex { category in
+			category.contains { subFood in
+				subFood.id == food.id
+			}
+		}
+		if let indexCategory = indexCategory {
+			// Вызвать у view метод по установке выделения
+			let indexPath = IndexPath(item: indexCategory, section: 0)
+			view.selectCellFromCollectionView(indexPath: indexPath)
+		}
+	}
+
+	/// Метод перезентера, обрабатывающий метож ЖЦ VC viewDidAppear
+	public func viewDidAppear() {
+		let indexPath = IndexPath(item: 0, section: 0)
+		view.selectCellFromCollectionView(indexPath: indexPath)
+	}
 }
