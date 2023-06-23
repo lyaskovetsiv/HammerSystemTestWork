@@ -219,8 +219,6 @@ extension MenuViewController: UICollectionViewDelegate {
 		case menuHeaderView.categoriesCollectionView:
 			presenter?.categoryDidTapped(by: indexPath)
 			proceedCategoryTapCell(indexPath: indexPath)
-			// Прокрутили tableView до нужного места
-			// scrollTableViewToCategory(at: selectedCategoryIndex)
 		default: break
 		}
 	}
@@ -265,5 +263,11 @@ extension MenuViewController: IMenuView {
 		menuTableView.reloadData()
 		menuHeaderView.bannerCollectionView.reloadData()
 		menuHeaderView.categoriesCollectionView.reloadData()
+	}
+
+	/// Метод вью, отвечающий за скролинг таблицы в случае переключения категорий
+	/// - Parameter indexPath: Индекс ячейки
+	public func scrollTableViewTo(indexPath: IndexPath) {
+		menuTableView.scrollToRow(at: indexPath, at: .top, animated: true)
 	}
 }

@@ -17,10 +17,9 @@ final class MenuPresenter {
 	private var remoteDataService: IRemoteDataService!
 	private var localDataService: ILocalDataService!
 
-	private var data: [CategoryModel] = []
 	private var promo: [PromoModel] = []
-	// ???
-	private var food: [FoodModel] = FoodModel.getMockData()
+	private var data: [CategoryModel] = []
+	private var test: [[FoodModel]] = []
 
 	// MARK: - Inits
 
@@ -39,7 +38,12 @@ extension MenuPresenter {
 		remoteDataService.fetchCategories(completion: { [weak self] result in
 			switch result {
 			case .success(let categories):
+				// Assignment
 				self?.data = categories
+				for category in categories {
+					self?.test.append(category.foods)
+				}
+				// Reload UI
 				DispatchQueue.main.async {
 					self?.view.reloadUI()
 				}
@@ -60,8 +64,6 @@ extension MenuPresenter {
 			}
 		}
 	}
-
-	
 }
 
 // MARK: - IMenuPresenter
@@ -71,21 +73,23 @@ extension MenuPresenter: IMenuPresenter {
 	/// Метод презентера, возвращающий количество блюд
 	/// - Returns: Количество блюд
 	public func getNumberOfFoodItems() -> Int {
-		return food.count
+		let array = test.flatMap { $0 }
+		return array.count
 	}
 
 	/// Метод презентера, позволяющий получить конкретное блюдл
 	/// - Parameter indexPath: Индекс ячейки
 	/// - Returns:Модель FoodModel
 	public func getFood(by indexPath: IndexPath) -> FoodModel {
-		return food[indexPath.row]
+		let array = test.flatMap { $0 }
+		return array[indexPath.row]
 	}
 
 	/// Метод презентера, обрабатывающий нажатие по ячейке с блюдом
 	/// - Parameter indexPath: Индекс ячейки
 	public func foodDidTapped(by indexPath: IndexPath) {
-		let model = food[indexPath.row]
-		print("В корзину добавлен товар: \(model.title)")
+		let array = test.flatMap { $0 }
+		print("Выбран товар: \(array[indexPath.row].title)")
 	}
 
 	// CATEGORIES
@@ -105,8 +109,21 @@ extension MenuPresenter: IMenuPresenter {
 	/// Метод презентера, обрабатывающий нажатие по ячейке с категорией
 	/// - Parameter indexPath: Индекс ячейки
 	public func categoryDidTapped(by indexPath: IndexPath) {
-		let model = data[indexPath.item]
-		print("Выбрана категория: \(model.title)")
+		// 1. Получили индекс категории из вью
+		// 2. Найти блюдо в категории по индексу
+		guard let firstElementOfCategory = test[indexPath.item].first else {
+			print("Данной категории не существует")
+			return
+		}
+		// 3. Найти индекс блюда в таблице
+		let index = test.flatMap { $0 }
+			.firstIndex { $0.id == firstElementOfCategory.id
+			}
+		// 4. Просколить таблицу
+		if let index = index {
+			let indexPath = IndexPath(row: index, section: 0)
+			view.scrollTableViewTo(indexPath: indexPath)
+		}
 	}
 
 	// PROMO

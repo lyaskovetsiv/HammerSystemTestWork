@@ -139,9 +139,8 @@
 		043CCFC42A444D5000ED6614 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				04E9F8352A44732B00B42CB5 /* Cells */,
-				04E9F83B2A44AE7100B42CB5 /* Other */,
 				04E9F84F2A44B7CB00B42CB5 /* Protocols */,
+				04E9F83B2A44AE7100B42CB5 /* Other */,
 				043CCFB22A444C8A00ED6614 /* MenuViewController.swift */,
 			);
 			path = View;
@@ -241,6 +240,7 @@
 		04E9F83B2A44AE7100B42CB5 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				04E9F8352A44732B00B42CB5 /* Cells */,
 				04E9F8392A44903800B42CB5 /* SelectTownView.swift */,
 				04E9F8312A44684700B42CB5 /* MenuHeaderView.swift */,
 			);

@@ -11,4 +11,5 @@ import Foundation
 /// Протокол вью Menu модуля
 protocol IMenuView: AnyObject {
 	func reloadUI()
+	func scrollTableViewTo(indexPath: IndexPath)
 }

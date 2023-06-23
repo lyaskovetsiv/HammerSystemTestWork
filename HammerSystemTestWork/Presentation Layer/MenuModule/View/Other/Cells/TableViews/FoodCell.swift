@@ -39,6 +39,8 @@ final class FoodCell: UITableViewCell {
 
 	private lazy var foodImageView: UIImageView = {
 		let imageView = UIImageView()
+		imageView.contentMode = .scaleAspectFill
+		imageView.clipsToBounds = true
 		return imageView
 	}()
 
