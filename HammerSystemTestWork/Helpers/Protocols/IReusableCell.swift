@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Прокотол для переиспользуемых ячеек
+/// Прокотол переиспользуемой ячейки
 protocol IReusableCell: AnyObject {
 	static var identifier: String { get }
 }

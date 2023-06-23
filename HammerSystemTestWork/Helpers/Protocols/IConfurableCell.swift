@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+/// Прокотол настраиваемой ячейки
 protocol IConfurableCell: AnyObject {
 	associatedtype ConfigurationModel
 	func configure(with model: ConfigurationModel)
