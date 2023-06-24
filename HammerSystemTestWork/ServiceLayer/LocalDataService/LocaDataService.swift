@@ -71,7 +71,9 @@ final class LocalDataService: ILocalDataService {
 			fetchRequest.predicate = NSPredicate(format: "title == %@", category.title as CVarArg)
 			if let _  = try context.fetch(fetchRequest).first {
 				// TODO: Проверка на наличие новых блюд
+				print("CoreData: Такая категория уже есть")
 			} else {
+				print("CoreData: Создаём новую категорию")
 				// Такой категории не существует, создаём новую категорию
 				let newDBCategory = DBCategory(context: context)
 				newDBCategory.id = category.id

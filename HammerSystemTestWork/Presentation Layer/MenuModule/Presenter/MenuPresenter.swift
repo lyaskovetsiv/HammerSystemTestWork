@@ -18,7 +18,7 @@ final class MenuPresenter {
 	private var localDataService: ILocalDataService!
 
 	private var promo: [PromoModel] = []
-	private var data: [CategoryModel] = []
+	private var categories: [CategoryModel] = []
 	private var foods: [[FoodModel]] = []
 
 	// MARK: - Inits
@@ -29,40 +29,73 @@ final class MenuPresenter {
 		self.view = view
 		self.remoteDataService = remoteDataService
 		self.localDataService = localDataService
-		fetchMockData()
+		loadData()
 	}
 }
 
 extension MenuPresenter {
-	private func fetchMockData() {
-		remoteDataService.fetchCategories(completion: { [weak self] result in
-			switch result {
-			case .success(let categories):
-				// Assignment
-				self?.data = categories
-				for category in categories {
-					self?.foods.append(category.foods)
-				}
-				// Reload UI
-				DispatchQueue.main.async {
-					self?.view.reloadUI()
-				}
-			case .failure(_):
-				print("Some Error")
-			}
-		})
+	private func loadData() {
+		let result = loadCategoriesFromLocalStorage()
+		switch result {
+		case .data(let savedCategories):
+			print("SystemLog: Загружаем данные из CoreData")
+			print(savedCategories.count)
+			self.categories = savedCategories
+			view.reloadUI()
+			loadDataFromServer()
+		case .empty, .error:
+			print("SystemLog: Данные в CoreData отсутствуют")
+			print("SystemLog: Загружаем данные из сети")
+			loadDataFromServer()
+		}
+	}
 
-		remoteDataService.fetchPromos { [weak self] result in
-			switch result {
-			case .success(let promos):
-				self?.promo = promos
-				DispatchQueue.main.async {
-					self?.view.reloadUI()
+	private func loadDataFromServer() {
+		DispatchQueue.global(qos: .background).async {
+			// Скачиваем данные из сети
+			self.remoteDataService.fetchCategories(completion: { [weak self] result in
+				switch result {
+				case .success(let categories):
+					self?.categories = categories
+					// Сохраняем данные CoreData
+					for category in categories {
+						self?.foods.append(category.foods)
+						self?.localDataService.saveCategory(category: category, foods: category.foods)
+					}
+					// Обновляем интерфейс с новыми данными
+					DispatchQueue.main.async {
+						self?.view.reloadUI()
+					}
+				case .failure(_):
+					// Тут может быть обратока кейса с ошибкой
+					print("Some Error")
 				}
-			case .failure(_):
-				print("Some Error")
+			})
+
+			self.remoteDataService.fetchPromos { [weak self] result in
+				switch result {
+				case .success(let promos):
+					self?.promo = promos
+					// Сохраняем данные CoreData
+					// ....
+					// Обновляем интерфейс с новыми данными
+					DispatchQueue.main.async {
+						self?.view.reloadUI()
+					}
+				case .failure(_):
+					// Тут может быть обратока кейса с ошибкой
+					print("Some Error")
+				}
 			}
 		}
+	}
+
+	private func loadCategoriesFromLocalStorage() -> LoadingLocalCategoriesResult {
+		localDataService.fetchCategories()
+	}
+
+	private func saveCategoryOnLocalStorage(category: CategoryModel) {
+		localDataService.saveCategory(category: category, foods: category.foods)
 	}
 }
 
@@ -96,14 +129,14 @@ extension MenuPresenter: IMenuPresenter {
 	/// Метод презентера, возвращающий количество категорий с блюдами
 	/// - Returns: Количество категорий
 	public func getNumberOfCategories() -> Int {
-		return data.count
+		return categories.count
 	}
 
 	/// Метод презентера, позволяющий получить конкретную категорию
 	/// - Parameter indexPath: Индекс ячейки
 	/// - Returns: Модель CategoryModel
 	public func getCategory(by indexPath: IndexPath) -> CategoryModel {
-		return data[indexPath.item]
+		return categories[indexPath.item]
 	}
 
 	/// Метод презентера, обрабатывающий нажатие по ячейке с категорией
