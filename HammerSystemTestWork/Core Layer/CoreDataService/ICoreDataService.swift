@@ -13,4 +13,6 @@ import CoreData
 protocol ICoreDataService: AnyObject {
 	func fetchCategories() throws -> [DBCategory]
 	func saveCategory(block: @escaping (NSManagedObjectContext) throws -> Void)
+	func fetchPromo() throws -> [DBPromo]
+	func savePromo(block: @escaping (NSManagedObjectContext) throws -> Void)
 }

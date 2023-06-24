@@ -52,4 +52,28 @@ final class CoreDataService: ICoreDataService {
 			}
 		}
 	}
+
+	/// Метод, возвращающий из CoreData массив c  DBPromo
+	/// - Returns: Массив DBPromo
+	public func fetchPromo() throws -> [DBPromo] {
+		let fetchRequst = DBPromo.fetchRequest()
+		return try viewContext.fetch(fetchRequst)
+	}
+
+	/// Метод, который сохраняет акцию  в СoreData
+	/// - Parameter block: Замыкание с контекстом, которое может выбросить ошибку
+	public func savePromo(block: @escaping (NSManagedObjectContext) throws -> Void) {
+		let backgroundContext = persistentContainer.newBackgroundContext()
+		backgroundContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+		backgroundContext.perform {
+			do {
+				try block(backgroundContext)
+				if backgroundContext.hasChanges {
+					try backgroundContext.save()
+				}
+			} catch {
+				print(error)
+			}
+		}
+	}
 }
