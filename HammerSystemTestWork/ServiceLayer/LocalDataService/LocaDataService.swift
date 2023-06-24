@@ -34,20 +34,18 @@ final class LocalDataService: ILocalDataService {
 				}
 				// Разворачиваем массив с блюдами
 				var foods: [FoodModel] = []
-//				if let dbFoods = dbCategory.foods?.allObjects as? [DBFood] {
-//					foods = dbFoods.compactMap { dbFood in
-//						guard let id = dbFood.id,
-//							  let title = dbFood.title,
-//							  let descr = dbFood.descr,
-//							  let price = dbFood.price else { return }
-//
-//						return FoodModel(id: id,
-//										 title: title,
-//										 decription: descr,
-//										 image: nil,
-//										 price: price)
-//					}
-//				}
+				if let dbFoods = dbCategory.foods?.allObjects as? [DBFood] {
+					for element in dbFoods {
+						if let id = element.id, let title = element.title, let description = element.descr {
+							let foodModel = FoodModel(id: id,
+													  title: title,
+													  decription: description,
+													  image: nil,
+													  price: Int(element.price))
+							foods.append(foodModel)
+						}
+					}
+				}
 				// Возвращаем категорию
 				return CategoryModel(id: id,
 									 title: title,
