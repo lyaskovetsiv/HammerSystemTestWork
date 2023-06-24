@@ -11,6 +11,6 @@ import Foundation
 /// Протокол сервиса, отвечающего за работу с локальными данными
 protocol ILocalDataService: AnyObject {
 	func fetchCategories() -> LoadingLocalCategoriesResult
-	func saveCategory(category: CategoryModel, food: [FoodModel])
+	func saveCategory(category: CategoryModel, foods: [FoodModel])
 }
 
