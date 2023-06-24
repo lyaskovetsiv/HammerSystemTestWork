@@ -77,10 +77,6 @@ extension MenuViewController {
 		setupConstraits()
 	}
 
-	override var preferredStatusBarStyle: UIStatusBarStyle {
-		return .darkContent
-	}
-
 	private func setupConstraits() {
 		selectTownView.translatesAutoresizingMaskIntoConstraints = false
 		NSLayoutConstraint.activate([
@@ -148,6 +144,33 @@ extension MenuViewController {
 			self.view.layoutIfNeeded()
 		}
 	}
+
+	private func changeAlphaForCell(scrollView: UIScrollView) {
+		if let collectionView = scrollView as? UICollectionView {
+			if collectionView == menuHeaderView.bannerCollectionView {
+				let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
+				let visibleCells = collectionView.visibleCells
+					for cell in visibleCells {
+						if let indexPath = collectionView.indexPath(for: cell) {
+							let cellRect = collectionView.layoutAttributesForItem(at: indexPath)?.frame ?? .zero
+							let fullyVisible = visibleRect.contains(cellRect)
+							UIView.animate(withDuration: 0.3) {
+								cell.alpha = fullyVisible ? 1.0 : 0.5
+							}
+						}
+					}
+				}
+			}
+		}
+
+	private func scrollForTableView(scrollView: UIScrollView) {
+		guard menuTableView.isDragging else { return }
+		let visibleIndexPath = menuTableView.indexPathsForVisibleRows ?? []
+		guard let firstVisibleIndexPath = visibleIndexPath.first else {
+			return
+		}
+		presenter?.tableViewDidScroll(indexPath: firstVisibleIndexPath)
+	}
 }
 
 // MARK: - UITableViewDataSource
@@ -180,18 +203,22 @@ extension MenuViewController: UITableViewDelegate {
 		presenter?.foodDidTapped(by: indexPath)
 	}
 
+	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+		if indexPath.row != tableView.numberOfRows(inSection: indexPath.section) - 1 {
+			let separator = createCustomSeparator()
+			cell.addSubview(separator)
+			separator.translatesAutoresizingMaskIntoConstraints = false
+			separator.leadingAnchor.constraint(equalTo: cell.leadingAnchor).isActive = true
+			separator.trailingAnchor.constraint(equalTo: cell.trailingAnchor).isActive = true
+			separator.bottomAnchor.constraint(equalTo: cell.bottomAnchor).isActive = true
+			separator.heightAnchor.constraint(equalToConstant: 2).isActive = true
+		}
+	}
+
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		changeAlphaForCell(scrollView: scrollView)
 		hideAndSnapHeaderView(scrollView: scrollView)
-
-		guard menuTableView.isDragging else {
-			return
-		}
-
-		let visibleIndexPath = menuTableView.indexPathsForVisibleRows ?? []
-		guard let firstVisibleIndexPath = visibleIndexPath.first else {
-			return
-		}
-		presenter?.tableViewDidScroll(indexPath: firstVisibleIndexPath)
+		scrollForTableView(scrollView: scrollView)
 	}
 }
 
@@ -244,18 +271,6 @@ extension MenuViewController: UICollectionViewDelegate {
 		default: break
 		}
 	}
-
-	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-		if indexPath.row != tableView.numberOfRows(inSection: indexPath.section) - 1 {
-			let separator = createCustomSeparator()
-			cell.addSubview(separator)
-			separator.translatesAutoresizingMaskIntoConstraints = false
-			separator.leadingAnchor.constraint(equalTo: cell.leadingAnchor).isActive = true
-			separator.trailingAnchor.constraint(equalTo: cell.trailingAnchor).isActive = true
-			separator.bottomAnchor.constraint(equalTo: cell.bottomAnchor).isActive = true
-			separator.heightAnchor.constraint(equalToConstant: 2).isActive = true
-		}
-	}
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
@@ -274,6 +289,15 @@ extension MenuViewController: UICollectionViewDelegateFlowLayout {
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
 		return Constants.minimumInteritemSpacingForSection
+	}
+
+	func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+		if collectionView == menuHeaderView.bannerCollectionView {
+			let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
+			let cellRect = collectionView.layoutAttributesForItem(at: indexPath)?.frame ?? .zero
+			let fullyVisible = visibleRect.contains(cellRect)
+			cell.alpha = fullyVisible ? 1.0 : 0.5
+		}
 	}
 }
 
