@@ -231,8 +231,8 @@
 		04E9F8352A44732B00B42CB5 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				04E9F85B2A44DC1500B42CB5 /* CollectionViews */,
-				04E9F85C2A44DC1D00B42CB5 /* TableViews */,
+				04E9F85B2A44DC1500B42CB5 /* CollectionView */,
+				04E9F85C2A44DC1D00B42CB5 /* TableView */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -293,21 +293,21 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		04E9F85B2A44DC1500B42CB5 /* CollectionViews */ = {
+		04E9F85B2A44DC1500B42CB5 /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
 				04E9F8462A44B3C800B42CB5 /* BannerCell.swift */,
 				04E9F8482A44B3D700B42CB5 /* CategoryFoodCell.swift */,
 			);
-			path = CollectionViews;
+			path = CollectionView;
 			sourceTree = "<group>";
 		};
-		04E9F85C2A44DC1D00B42CB5 /* TableViews */ = {
+		04E9F85C2A44DC1D00B42CB5 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
 				04E9F8332A44718900B42CB5 /* FoodCell.swift */,
 			);
-			path = TableViews;
+			path = TableView;
 			sourceTree = "<group>";
 		};
 		04E9F85D2A44DE4B00B42CB5 /* Helpers */ = {

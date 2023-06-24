@@ -17,14 +17,13 @@ class MenuViewController: UIViewController {
 
 	private enum Constants {
 		// Colors
-		static let mainBackgroundColor: UIColor = .white
+		static let mainBackgroundColor: UIColor = #colorLiteral(red: 0.9487603307, green: 0.9565995336, blue: 0.9732769132, alpha: 1)
 		static let separatorColor: UIColor = #colorLiteral(red: 0.9487603307, green: 0.9565995336, blue: 0.9732769132, alpha: 1)
 		static let tableViewBackgroundColor: UIColor = .white
 		// Sizes
 		static let heightForRow: CGFloat = 170
 		static let menuHeaderViewHeight: CGFloat = 260
 		static let minimumInteritemSpacingForSection: CGFloat = 16
-		static let sizeForBannerCell: CGSize = CGSize(width: 300, height: 122)
 		static let sizeForCategoryCell: CGSize = CGSize(width: 95, height: 32)
 	}
 
@@ -76,6 +75,10 @@ extension MenuViewController {
 		view.addSubview(menuHeaderView)
 		view.addSubview(menuTableView)
 		setupConstraits()
+	}
+
+	override var preferredStatusBarStyle: UIStatusBarStyle {
+		return .darkContent
 	}
 
 	private func setupConstraits() {
@@ -261,7 +264,7 @@ extension MenuViewController: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		switch collectionView {
 		case menuHeaderView.bannerCollectionView:
-			return Constants.sizeForBannerCell
+			return CGSize(width: 300, height: menuHeaderView.bannerCollectionView.bounds.height)
 		case menuHeaderView.categoriesCollectionView:
 			return Constants.sizeForCategoryCell
 		default: break
