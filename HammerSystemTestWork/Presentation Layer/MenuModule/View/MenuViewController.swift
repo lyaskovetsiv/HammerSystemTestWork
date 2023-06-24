@@ -25,6 +25,7 @@ class MenuViewController: UIViewController {
 		static let menuHeaderViewHeight: CGFloat = 260
 		static let minimumInteritemSpacingForSection: CGFloat = 16
 		static let sizeForCategoryCell: CGSize = CGSize(width: 95, height: 32)
+		static let bannerCollectionViewWidth: CGFloat = 300
 	}
 
 	// MARK: - UI
@@ -137,8 +138,7 @@ extension MenuViewController {
 			self.view.layoutIfNeeded()
 		}
 	}
-
-	// Cells
+	// Cell - Promo
 	private func changeAlphaForBannerCell(scrollView: UIScrollView) {
 		if let collectionView = scrollView as? UICollectionView {
 			if collectionView == menuHeaderView.bannerCollectionView {
@@ -156,7 +156,7 @@ extension MenuViewController {
 				}
 			}
 		}
-
+	// Cell - Categories
 	private func processChangeCategoryCellUI(indexPath: IndexPath) {
 		// Обнуляем предыдущую выделенную ячейку
 		if let selectedIndexPath = selectedCategoryIndexPath {
@@ -272,9 +272,18 @@ extension MenuViewController: UICollectionViewDelegate {
 		case menuHeaderView.bannerCollectionView:
 			presenter?.bannerDidTapped(by: indexPath)
 		case menuHeaderView.categoriesCollectionView:
-			presenter?.categoryDidTapped(by: indexPath)
 			processChangeCategoryCellUI(indexPath: indexPath)
+			presenter?.categoryDidTapped(by: indexPath)
 		default: break
+		}
+	}
+
+	func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+		if collectionView == menuHeaderView.bannerCollectionView {
+			let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
+			let cellRect = collectionView.layoutAttributesForItem(at: indexPath)?.frame ?? .zero
+			let fullyVisible = visibleRect.contains(cellRect)
+			cell.alpha = fullyVisible ? 1.0 : 0.5
 		}
 	}
 }
@@ -285,7 +294,7 @@ extension MenuViewController: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		switch collectionView {
 		case menuHeaderView.bannerCollectionView:
-			return CGSize(width: 300, height: menuHeaderView.bannerCollectionView.bounds.height)
+			return CGSize(width: Constants.bannerCollectionViewWidth, height: menuHeaderView.bannerCollectionView.bounds.height)
 		case menuHeaderView.categoriesCollectionView:
 			return Constants.sizeForCategoryCell
 		default: break
@@ -295,15 +304,6 @@ extension MenuViewController: UICollectionViewDelegateFlowLayout {
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
 		return Constants.minimumInteritemSpacingForSection
-	}
-
-	func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-		if collectionView == menuHeaderView.bannerCollectionView {
-			let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
-			let cellRect = collectionView.layoutAttributesForItem(at: indexPath)?.frame ?? .zero
-			let fullyVisible = visibleRect.contains(cellRect)
-			cell.alpha = fullyVisible ? 1.0 : 0.5
-		}
 	}
 }
 

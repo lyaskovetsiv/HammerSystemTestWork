@@ -19,7 +19,7 @@ final class MenuPresenter {
 
 	private var promo: [PromoModel] = []
 	private var data: [CategoryModel] = []
-	private var food: [[FoodModel]] = []
+	private var foods: [[FoodModel]] = []
 
 	// MARK: - Inits
 
@@ -41,7 +41,7 @@ extension MenuPresenter {
 				// Assignment
 				self?.data = categories
 				for category in categories {
-					self?.food.append(category.foods)
+					self?.foods.append(category.foods)
 				}
 				// Reload UI
 				DispatchQueue.main.async {
@@ -73,7 +73,7 @@ extension MenuPresenter: IMenuPresenter {
 	/// Метод презентера, возвращающий количество блюд
 	/// - Returns: Количество блюд
 	public func getNumberOfFoodItems() -> Int {
-		let array = food.flatMap { $0 }
+		let array = foods.flatMap { $0 }
 		return array.count
 	}
 
@@ -81,14 +81,14 @@ extension MenuPresenter: IMenuPresenter {
 	/// - Parameter indexPath: Индекс ячейки
 	/// - Returns:Модель FoodModel
 	public func getFood(by indexPath: IndexPath) -> FoodModel {
-		let array = food.flatMap { $0 }
+		let array = foods.flatMap { $0 }
 		return array[indexPath.row]
 	}
 
 	/// Метод презентера, обрабатывающий нажатие по ячейке с блюдом
 	/// - Parameter indexPath: Индекс ячейки
 	public func foodDidTapped(by indexPath: IndexPath) {
-		let array = food.flatMap { $0 }
+		let array = foods.flatMap { $0 }
 		print("Выбран товар: \(array[indexPath.row].title)")
 	}
 
@@ -111,12 +111,12 @@ extension MenuPresenter: IMenuPresenter {
 	public func categoryDidTapped(by indexPath: IndexPath) {
 		// 1. Получили индекс категории из вью
 		// 2. Найти блюдо в категории по индексу
-		guard let firstElementOfCategory = food[indexPath.item].first else {
+		guard let firstElementOfCategory = foods[indexPath.item].first else {
 			print("Данной категории не существует")
 			return
 		}
 		// 3. Найти индекс блюда в таблице
-		let index = food.flatMap { $0 }
+		let index = foods.flatMap { $0 }
 			.firstIndex { $0.id == firstElementOfCategory.id
 			}
 		// 4. Просколить таблицу
@@ -151,10 +151,10 @@ extension MenuPresenter: IMenuPresenter {
 	/// - Parameter indexPath: Индекс первой видимой ячейки
 	public func tableViewDidScroll(indexPath: IndexPath) {
 		// Найти элемент во flat array блюд
-		let array = food.flatMap { $0 }
+		let array = foods.flatMap { $0 }
 		let food = array[indexPath.row]
 		// Найти элемент в списке с категориями и вернуть индекс категории
-		let indexCategory = food.firstIndex { category in
+		let indexCategory = foods.firstIndex { category in
 			category.contains { subFood in
 				subFood.id == food.id
 			}
