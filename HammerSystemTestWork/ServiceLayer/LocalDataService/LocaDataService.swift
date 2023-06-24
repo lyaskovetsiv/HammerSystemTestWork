@@ -25,7 +25,43 @@ final class LocalDataService: ILocalDataService {
 	/// Метод сервиса, который отвечает за выгрузку данных из локальногохранилища
 	/// - Returns: Результат выгрузки LoadingLocalCategoriesResult
 	public func fetchCategories() -> LoadingLocalCategoriesResult {
-		.empty
+		do {
+			let dbCategories = try coreDataService.fetchCategories()
+			let categories: [CategoryModel] = dbCategories.compactMap { dbCategory in
+				// Проверяем поля
+				guard let id = dbCategory.id, let title = dbCategory.title else {
+					return nil
+				}
+				// Разворачиваем массив с блюдами
+				var foods: [FoodModel] = []
+//				if let dbFoods = dbCategory.foods?.allObjects as? [DBFood] {
+//					foods = dbFoods.compactMap { dbFood in
+//						guard let id = dbFood.id,
+//							  let title = dbFood.title,
+//							  let descr = dbFood.descr,
+//							  let price = dbFood.price else { return }
+//
+//						return FoodModel(id: id,
+//										 title: title,
+//										 decription: descr,
+//										 image: nil,
+//										 price: price)
+//					}
+//				}
+				// Возвращаем категорию
+				return CategoryModel(id: id,
+									 title: title,
+									 foods: foods)
+			}
+			if categories.isEmpty {
+				return .empty
+			} else {
+				return .data(categories)
+			}
+		} catch {
+			print(error)
+			return .error
+		}
 	}
 
 	/// Метод сервиса, который сохраняет категорию в локальное хранилище
