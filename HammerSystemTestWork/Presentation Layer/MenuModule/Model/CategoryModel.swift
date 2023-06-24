@@ -10,7 +10,7 @@ import Foundation
 
 /// Модель категории блюд
 struct CategoryModel {
-	let id: UUID
+	let id: String
 	let title: String
 	let foods: [FoodModel]
 }

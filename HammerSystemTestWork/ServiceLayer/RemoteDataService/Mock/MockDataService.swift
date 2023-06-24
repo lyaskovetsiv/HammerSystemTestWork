@@ -28,7 +28,7 @@ final class MockDataService: IRemoteDataService {
 
 extension MockDataService {
 	private func getMockCategories() -> [CategoryModel] {
-		let category1 = CategoryModel(id: UUID(), title: "Пицца",
+		let category1 = CategoryModel(id: "cat1", title: "Пицца",
 									  foods: [
 										FoodModel(id: UUID(),
 												  title: "Ветчина и грибы",
@@ -51,7 +51,7 @@ extension MockDataService {
 												  image: nil,
 												  price: 345)
 									  ])
-		let category2 = CategoryModel(id: UUID(), title: "Комбо",
+		let category2 = CategoryModel(id: "cat2", title: "Комбо",
 									  foods: [
 										FoodModel(id: UUID(),
 												  title: "Сет №1",
@@ -74,7 +74,7 @@ extension MockDataService {
 												  image: (UIImage(named: "combo4")),
 												  price: 900)
 									  ])
-		let category3 = CategoryModel(id: UUID(), title: "Десерты",
+		let category3 = CategoryModel(id: "cat3", title: "Десерты",
 									  foods: [
 										FoodModel(id: UUID(),
 												  title: "Чизкейк манго",
@@ -97,7 +97,7 @@ extension MockDataService {
 												  image: (UIImage(named: "tasty4")),
 												  price: 345)
 									  ])
-		let category4 = CategoryModel(id: UUID(), title: "Напитки",
+		let category4 = CategoryModel(id: "cat4", title: "Напитки",
 									  foods: [
 										FoodModel(id: UUID(),
 												  title: "Батлика 0, грейпфрукт ",

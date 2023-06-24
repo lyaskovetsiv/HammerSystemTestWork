@@ -60,7 +60,7 @@ extension MenuPresenter {
 			print("SystemLog: Загружаем данные с акциями из CoreData")
 			self.promo = promo
 			view.reloadUI(type: .category)
-			loadPromoFromServer()
+			// loadPromoFromServer()
 		case .empty, .error:
 			// Тут можно обработать ошибки и кейс с пустыми данными
 			print("SystemLog: Загружаем данные с категориями из сети")

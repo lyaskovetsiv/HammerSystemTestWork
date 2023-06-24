@@ -33,8 +33,8 @@ final class CoreDataService: ICoreDataService {
 	/// - Returns: Массив DBCategories
 	public func fetchCategories() throws -> [DBCategory] {
 		let fetchRequst = DBCategory.fetchRequest()
-		// let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
-		// fetchRequst.sortDescriptors = [sortDescriptor]
+		let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
+		fetchRequst.sortDescriptors = [sortDescriptor]
 		return try viewContext.fetch(fetchRequst)
 	}
 
