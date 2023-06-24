@@ -23,7 +23,7 @@
 		0443A8032A45A5E9009ABA9C /* ICoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443A8022A45A5E9009ABA9C /* ICoreDataService.swift */; };
 		048D61B22A457BC900E52E67 /* MockDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D61B12A457BC900E52E67 /* MockDataService.swift */; };
 		04E9F82F2A444EF400B42CB5 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F82E2A444EF400B42CB5 /* MainVC.swift */; };
-		04E9F8322A44684700B42CB5 /* MenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8312A44684700B42CB5 /* MenuHeaderView.swift */; };
+		04E9F8322A44684700B42CB5 /* CollectionsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8312A44684700B42CB5 /* CollectionsHeaderView.swift */; };
 		04E9F8342A44718900B42CB5 /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8332A44718900B42CB5 /* FoodCell.swift */; };
 		04E9F83A2A44903800B42CB5 /* SelectTownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F8392A44903800B42CB5 /* SelectTownView.swift */; };
 		04E9F83D2A44AEAE00B42CB5 /* MenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9F83C2A44AEAE00B42CB5 /* MenuPresenter.swift */; };
@@ -59,7 +59,7 @@
 		0443A8022A45A5E9009ABA9C /* ICoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICoreDataService.swift; sourceTree = "<group>"; };
 		048D61B12A457BC900E52E67 /* MockDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataService.swift; sourceTree = "<group>"; };
 		04E9F82E2A444EF400B42CB5 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
-		04E9F8312A44684700B42CB5 /* MenuHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHeaderView.swift; sourceTree = "<group>"; };
+		04E9F8312A44684700B42CB5 /* CollectionsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsHeaderView.swift; sourceTree = "<group>"; };
 		04E9F8332A44718900B42CB5 /* FoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
 		04E9F8392A44903800B42CB5 /* SelectTownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTownView.swift; sourceTree = "<group>"; };
 		04E9F83C2A44AEAE00B42CB5 /* MenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPresenter.swift; sourceTree = "<group>"; };
@@ -140,7 +140,8 @@
 			isa = PBXGroup;
 			children = (
 				04E9F84F2A44B7CB00B42CB5 /* Protocols */,
-				04E9F83B2A44AE7100B42CB5 /* Other */,
+				04E9F8352A44732B00B42CB5 /* Cells */,
+				046657722A46D61A004DBF0A /* Subviews */,
 				043CCFB22A444C8A00ED6614 /* MenuViewController.swift */,
 			);
 			path = View;
@@ -219,6 +220,15 @@
 			path = CoreDataService;
 			sourceTree = "<group>";
 		};
+		046657722A46D61A004DBF0A /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				04E9F8392A44903800B42CB5 /* SelectTownView.swift */,
+				04E9F8312A44684700B42CB5 /* CollectionsHeaderView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
 		04E9F8302A444F7B00B42CB5 /* Presentation Layer */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,16 +245,6 @@
 				04E9F85C2A44DC1D00B42CB5 /* TableView */,
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		04E9F83B2A44AE7100B42CB5 /* Other */ = {
-			isa = PBXGroup;
-			children = (
-				04E9F8352A44732B00B42CB5 /* Cells */,
-				04E9F8392A44903800B42CB5 /* SelectTownView.swift */,
-				04E9F8312A44684700B42CB5 /* MenuHeaderView.swift */,
-			);
-			path = Other;
 			sourceTree = "<group>";
 		};
 		04E9F83E2A44AEBA00B42CB5 /* Presenter */ = {
@@ -390,7 +390,7 @@
 			files = (
 				0443A8002A45A5D9009ABA9C /* CoreDataService.swift in Sources */,
 				0443A7FE2A45A580009ABA9C /* ILocalDataService.swift in Sources */,
-				04E9F8322A44684700B42CB5 /* MenuHeaderView.swift in Sources */,
+				04E9F8322A44684700B42CB5 /* CollectionsHeaderView.swift in Sources */,
 				04E9F8442A44AFA800B42CB5 /* ModuleAssembly.swift in Sources */,
 				0443A7FB2A45A55A009ABA9C /* LocaDataService.swift in Sources */,
 				0443A7F32A45A21C009ABA9C /* NetworkService.swift in Sources */,

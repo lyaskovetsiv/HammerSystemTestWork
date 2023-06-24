@@ -34,8 +34,8 @@ class MenuViewController: UIViewController {
 		return view
 	}()
 
-	private var menuHeaderView: MenuHeaderView = {
-		let view = MenuHeaderView()
+	private var menuHeaderView: CollectionsHeaderView = {
+		let view = CollectionsHeaderView()
 		return view
 	}()
 
@@ -69,6 +69,7 @@ class MenuViewController: UIViewController {
 // MARK: - Private methods
 
 extension MenuViewController {
+	// UI
 	private func setupView() {
 		view.backgroundColor = Constants.mainBackgroundColor
 		view.addSubview(selectTownView)
@@ -101,28 +102,20 @@ extension MenuViewController {
 		])
 	}
 
-	private func updateCellDesign(collectionView: UICollectionView, indexPath: IndexPath, selected: Bool) {
-		if let cell = collectionView.cellForItem(at: indexPath) as? CategoryFoodCell {
-			cell.updateDesign(selected: selected)
-		}
-	}
-
-	private func processChangeCellUI(indexPath: IndexPath) {
-		if let selectedIndexPath = selectedCategoryIndexPath {
-			updateCellDesign(collectionView: menuHeaderView.categoriesCollectionView,
-							 indexPath: selectedIndexPath,
-							 selected: false)
-		}
-		updateCellDesign(collectionView: menuHeaderView.categoriesCollectionView,
-						 indexPath: indexPath,
-						 selected: true)
-		selectedCategoryIndexPath = indexPath
-	}
-
 	private func createCustomSeparator() -> UIView {
 		let separator = UIView(frame: CGRect(x: 0, y: 0, width: menuTableView.frame.width, height: 1.0))
 		separator.backgroundColor = Constants.separatorColor
 		return separator
+	}
+
+	// Actions
+	private func scrollForTableView(scrollView: UIScrollView) {
+		guard menuTableView.isDragging else { return }
+		let visibleIndexPath = menuTableView.indexPathsForVisibleRows ?? []
+		guard let firstVisibleIndexPath = visibleIndexPath.first else {
+			return
+		}
+		presenter?.tableViewDidScroll(indexPath: firstVisibleIndexPath)
 	}
 
 	private func hideAndSnapHeaderView(scrollView: UIScrollView) {
@@ -145,7 +138,8 @@ extension MenuViewController {
 		}
 	}
 
-	private func changeAlphaForCell(scrollView: UIScrollView) {
+	// Cells
+	private func changeAlphaForBannerCell(scrollView: UIScrollView) {
 		if let collectionView = scrollView as? UICollectionView {
 			if collectionView == menuHeaderView.bannerCollectionView {
 				let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
@@ -153,9 +147,9 @@ extension MenuViewController {
 					for cell in visibleCells {
 						if let indexPath = collectionView.indexPath(for: cell) {
 							let cellRect = collectionView.layoutAttributesForItem(at: indexPath)?.frame ?? .zero
-							let fullyVisible = visibleRect.contains(cellRect)
+							let isFullyVisible = visibleRect.contains(cellRect)
 							UIView.animate(withDuration: 0.3) {
-								cell.alpha = fullyVisible ? 1.0 : 0.5
+								cell.alpha = isFullyVisible ? 1.0 : 0.5
 							}
 						}
 					}
@@ -163,13 +157,25 @@ extension MenuViewController {
 			}
 		}
 
-	private func scrollForTableView(scrollView: UIScrollView) {
-		guard menuTableView.isDragging else { return }
-		let visibleIndexPath = menuTableView.indexPathsForVisibleRows ?? []
-		guard let firstVisibleIndexPath = visibleIndexPath.first else {
-			return
+	private func processChangeCategoryCellUI(indexPath: IndexPath) {
+		// Обнуляем предыдущую выделенную ячейку
+		if let selectedIndexPath = selectedCategoryIndexPath {
+			updateCategoryCellDesign(collectionView: menuHeaderView.categoriesCollectionView,
+							 indexPath: selectedIndexPath,
+							 selected: false)
 		}
-		presenter?.tableViewDidScroll(indexPath: firstVisibleIndexPath)
+		// Обновляем новую ячейку
+		updateCategoryCellDesign(collectionView: menuHeaderView.categoriesCollectionView,
+						 indexPath: indexPath,
+						 selected: true)
+
+		selectedCategoryIndexPath = indexPath
+	}
+
+	private func updateCategoryCellDesign(collectionView: UICollectionView, indexPath: IndexPath, selected: Bool) {
+		if let cell = collectionView.cellForItem(at: indexPath) as? CategoryFoodCell {
+			cell.updateDesign(selected: selected)
+		}
 	}
 }
 
@@ -216,7 +222,7 @@ extension MenuViewController: UITableViewDelegate {
 	}
 
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		changeAlphaForCell(scrollView: scrollView)
+		changeAlphaForBannerCell(scrollView: scrollView)
 		hideAndSnapHeaderView(scrollView: scrollView)
 		scrollForTableView(scrollView: scrollView)
 	}
@@ -267,7 +273,7 @@ extension MenuViewController: UICollectionViewDelegate {
 			presenter?.bannerDidTapped(by: indexPath)
 		case menuHeaderView.categoriesCollectionView:
 			presenter?.categoryDidTapped(by: indexPath)
-			processChangeCellUI(indexPath: indexPath)
+			processChangeCategoryCellUI(indexPath: indexPath)
 		default: break
 		}
 	}
@@ -320,6 +326,6 @@ extension MenuViewController: IMenuView {
 	/// Метод вью, отвечающий за выделение ячейки с категорией при скроллинге таблицы
 	/// - Parameter indexPath: Индекс ячейки
 	public func selectCellFromCollectionView(indexPath: IndexPath) {
-		processChangeCellUI(indexPath: indexPath)
+		processChangeCategoryCellUI(indexPath: indexPath)
 	}
 }

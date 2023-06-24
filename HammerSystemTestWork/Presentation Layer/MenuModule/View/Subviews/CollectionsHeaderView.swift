@@ -1,5 +1,5 @@
 //
-//  MenuHeaderView.swift
+//  CollectionsHeaderView.swift
 //  HammerSystemTestWork
 //
 //  Created by Ivan Lyaskovets on 22.06.2023.
@@ -9,7 +9,7 @@ import UIKit
 
 
 /// Класс  вью с категориями блюд и акциями в Menu модуле
-final class MenuHeaderView: UIView {
+final class CollectionsHeaderView: UIView {
 
 	// MARK: - Private constants
 
@@ -104,7 +104,7 @@ final class MenuHeaderView: UIView {
 
 // MARK: - Private methods
 
-extension MenuHeaderView {
+extension CollectionsHeaderView {
 	private func setupView() {
 		backgroundColor = Constants.mainBackgroundColor
 		addSubview(bannerCollectionView)
