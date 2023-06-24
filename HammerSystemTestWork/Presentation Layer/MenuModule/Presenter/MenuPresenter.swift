@@ -48,7 +48,6 @@ extension MenuPresenter {
 			// loadCategoriesFromServer()
 		case .empty, .error:
 			// Тут можно обработать ошибки и кейс с пустыми данными
-			print("SystemLog: Данные c категориями в CoreData отсутствуют")
 			print("SystemLog: Загружаем данные с категориями из сети")
 			loadCategoriesFromServer()
 		}
@@ -58,40 +57,18 @@ extension MenuPresenter {
 		let resultPromos = loadPromosFromLocalStorage()
 		switch resultPromos {
 		case .data(let promo):
+			print("SystemLog: Загружаем данные с акциями из CoreData")
 			self.promo = promo
 			view.reloadUI(type: .category)
-			// loadPromoFromServer()
+			loadPromoFromServer()
 		case .empty, .error:
 			// Тут можно обработать ошибки и кейс с пустыми данными
-			print("SystemLog: Данные c акциями в CoreData отсутствуют")
+			print("SystemLog: Загружаем данные с категориями из сети")
 			loadPromoFromServer()
 		}
 	}
 
 	// Server
-	private func loadPromoFromServer() {
-		DispatchQueue.global(qos: .background).async {
-			self.remoteDataService.fetchPromos { [weak self] result in
-				switch result {
-				case .success(let promos):
-					self?.promo = promos
-					// Сохраняем данные CoreData
-					for promo in promos {
-						self?.localDataService.savePromo(promo: promo)
-					}
-					// Обновляем интерфейс с новыми данными
-					DispatchQueue.main.async {
-						self?.view.reloadUI(type: .promo)
-					}
-				case .failure(_):
-					// Тут может быть обратока кейса с ошибкой
-					// Нет соединения или ошибка с сервера, закешированные данные всё равно отображаются на экране
-					print("Some Error")
-				}
-			}
-		}
-	}
-
 	private func loadCategoriesFromServer() {
 		DispatchQueue.global(qos: .background).async {
 			// Скачиваем данные из сети
@@ -110,11 +87,31 @@ extension MenuPresenter {
 					}
 				case .failure(_):
 					// Тут может быть обратока кейса с ошибкой
-					// Нет соединения или ошибка с сервера, закешированные данные всё равно отображаются на экране
-					print("")
 					print("Some Error")
 				}
 			})
+		}
+	}
+
+	private func loadPromoFromServer() {
+		DispatchQueue.global(qos: .background).async {
+			self.remoteDataService.fetchPromos { [weak self] result in
+				switch result {
+				case .success(let promos):
+					self?.promo = promos
+					// Сохраняем данные CoreData
+					for promo in promos {
+						self?.localDataService.savePromo(promo: promo)
+					}
+					// Обновляем интерфейс с новыми данными
+					DispatchQueue.main.async {
+						self?.view.reloadUI(type: .promo)
+					}
+				case .failure(_):
+					// Нет соединения или ошибка с сервера
+					print("Some Error")
+				}
+			}
 		}
 	}
 

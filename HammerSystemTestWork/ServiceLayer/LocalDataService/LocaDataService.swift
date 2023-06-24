@@ -117,7 +117,7 @@ final class LocalDataService: ILocalDataService {
 				// Возвращаем категорию
 				return PromoModel(id: id,
 								  title: title,
-				banner: image)
+								  banner: image)
 			}
 			if promo.isEmpty {
 				return .empty
@@ -135,8 +135,8 @@ final class LocalDataService: ILocalDataService {
 	public func savePromo(promo: PromoModel) {
 		coreDataService.saveCategory { context in
 			// Проверяем есть ли такая акция уже в CoreData
-			let fetchRequest = DBCategory.fetchRequest()
-			fetchRequest.predicate = NSPredicate(format: "title == %@", promo.title as CVarArg)
+			let fetchRequest = DBPromo.fetchRequest()
+			fetchRequest.predicate = NSPredicate(format: "id == %@", promo.id as CVarArg)
 			if let _  = try context.fetch(fetchRequest).first {
 				print("CoreData: Такая акция уже есть")
 			} else {

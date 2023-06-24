@@ -125,10 +125,10 @@ extension MockDataService {
 
 	private func getMockPromos() -> [PromoModel] {
 		return [
-			PromoModel(id: UUID(),
+			PromoModel(id: "pr1",
 					   title: "2-ая пицца за 2 рубля",
 					   banner: UIImage(named: "promo1")),
-			PromoModel(id: UUID(),
+			PromoModel(id: "pr2",
 					   title: "Скидка 30% на первый заказ",
 					   banner: UIImage(named: "promo2"))
 		]

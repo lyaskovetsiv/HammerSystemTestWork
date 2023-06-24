@@ -11,7 +11,7 @@ import UIKit
 
 /// Модель рекламной акции
 struct PromoModel {
-	let id: UUID
+	let id: String
 	let title: String
 	var banner: UIImage?
 }
