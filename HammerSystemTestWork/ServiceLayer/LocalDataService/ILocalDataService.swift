@@ -12,5 +12,7 @@ import Foundation
 protocol ILocalDataService: AnyObject {
 	func fetchCategories() -> LoadingLocalCategoriesResult
 	func saveCategory(category: CategoryModel, foods: [FoodModel])
+	func fetchPromo() -> LoadingLocalPromoResult
+	func savePromo(promo: PromoModel)
 }
 

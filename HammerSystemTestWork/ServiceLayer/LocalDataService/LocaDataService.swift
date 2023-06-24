@@ -22,7 +22,7 @@ final class LocalDataService: ILocalDataService {
 
 	// MARK: - Public methods
 
-	/// Метод сервиса, который отвечает за выгрузку данных из локальногохранилища
+	/// Метод сервиса, который отвечает за выгрузку категорий из локальногохранилища
 	/// - Returns: Результат выгрузки LoadingLocalCategoriesResult
 	public func fetchCategories() -> LoadingLocalCategoriesResult {
 		do {
@@ -93,5 +93,17 @@ final class LocalDataService: ILocalDataService {
 				newDBCategory.foods = NSSet(array: newDBFoods)
 			}
 		}
+	}
+
+	/// Метод сервиса, который отвечает за выгрузку акций из локальногохранилища
+	/// - Returns: Результат выгрузки LoadingLocalCategoriesResult
+	public func fetchPromo() -> LoadingLocalPromoResult {
+		.empty
+	}
+
+	/// Метод сервиса, который сохраняет акцию в локальное хранилище
+	/// - Parameter category: Текущая акция
+	public func savePromo(promo: PromoModel) {
+
 	}
 }
