@@ -13,6 +13,6 @@ struct FoodModel {
 	let id: UUID
 	let title: String
 	let decription: String
-	let image: UIImage?
+	var image: UIImage?
 	let price: Int
 }

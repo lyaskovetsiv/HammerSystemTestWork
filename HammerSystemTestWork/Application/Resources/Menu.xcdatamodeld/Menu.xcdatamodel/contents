@@ -8,14 +8,14 @@
     <entity name="DBFood" representedClassName="DBFood" syncable="YES" codeGenerationType="class">
         <attribute name="descr" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="imageData" optional="YES" attributeType="Binary"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="price" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DBCategory" inverseName="foods" inverseEntity="DBCategory"/>
     </entity>
     <entity name="DBPromo" representedClassName="DBPromo" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="imageData" optional="YES" attributeType="Binary"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <uniquenessConstraints>
             <uniquenessConstraint>

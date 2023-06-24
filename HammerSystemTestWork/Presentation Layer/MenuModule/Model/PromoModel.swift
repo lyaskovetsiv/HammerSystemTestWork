@@ -13,5 +13,5 @@ import UIKit
 struct PromoModel {
 	let id: UUID
 	let title: String
-	let banner: UIImage?
+	var banner: UIImage?
 }

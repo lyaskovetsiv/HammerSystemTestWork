@@ -178,11 +178,12 @@ extension FoodCell: IConfurableCell {
 		titleLabel.text = model.title
 		descriptionLabel.text = model.decription
 		buyBtn.setTitle("от \(model.price) р", for: .normal)
-		guard let image = model.image else {
+		if let image = model.image {
+			foodImageView.image = image
+		} else {
 			activityIndicator.isHidden = false
 			activityIndicator.startAnimating()
-			return
 		}
-		foodImageView.image = image
+		return
 	}
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 /// Класс сервиса, отвечающего за работу с локальными данными
 final class LocalDataService: ILocalDataService {
@@ -37,11 +38,15 @@ final class LocalDataService: ILocalDataService {
 				if let dbFoods = dbCategory.foods?.allObjects as? [DBFood] {
 					for element in dbFoods {
 						if let id = element.id, let title = element.title, let description = element.descr {
-							let foodModel = FoodModel(id: id,
+							var foodModel = FoodModel(id: id,
 													  title: title,
 													  decription: description,
 													  image: nil,
 													  price: Int(element.price))
+							if let data = element.imageData {
+								let image = UIImage(data: data)
+								foodModel.image = image
+							}
 							foods.append(foodModel)
 						}
 					}
@@ -70,7 +75,7 @@ final class LocalDataService: ILocalDataService {
 			let fetchRequest = DBCategory.fetchRequest()
 			fetchRequest.predicate = NSPredicate(format: "title == %@", category.title as CVarArg)
 			if let _  = try context.fetch(fetchRequest).first {
-				// TODO: Проверка на наличие новых блюд
+				// Тут можно добавить проверку на наличие новых блюд
 				print("CoreData: Такая категория уже есть")
 			} else {
 				print("CoreData: Создаём новую категорию")
@@ -85,7 +90,7 @@ final class LocalDataService: ILocalDataService {
 					newDBFood.id = food.id
 					newDBFood.title = food.title
 					newDBFood.descr = food.decription
-					newDBFood.imageData = nil
+					newDBFood.imageData = food.image?.pngData()
 					newDBFood.price = Float(food.price)
 					newDBFood.category = newDBCategory
 					newDBFoods.append(newDBFood)
@@ -98,12 +103,50 @@ final class LocalDataService: ILocalDataService {
 	/// Метод сервиса, который отвечает за выгрузку акций из локальногохранилища
 	/// - Returns: Результат выгрузки LoadingLocalCategoriesResult
 	public func fetchPromo() -> LoadingLocalPromoResult {
-		.empty
+		do {
+			let dbPromo = try coreDataService.fetchPromo()
+			let promo: [PromoModel] = dbPromo.compactMap { dbPromo in
+				// Проверяем поля
+				guard let id = dbPromo.id, let title = dbPromo.title else {
+					return nil
+				}
+				var image: UIImage?
+				if let data = dbPromo.imageData {
+					image = UIImage(data: data)
+				}
+				// Возвращаем категорию
+				return PromoModel(id: id,
+								  title: title,
+				banner: image)
+			}
+			if promo.isEmpty {
+				return .empty
+			} else {
+				return .data(promo)
+			}
+		} catch {
+			print(error)
+			return .error
+		}
 	}
 
 	/// Метод сервиса, который сохраняет акцию в локальное хранилище
 	/// - Parameter category: Текущая акция
 	public func savePromo(promo: PromoModel) {
-
+		coreDataService.saveCategory { context in
+			// Проверяем есть ли такая акция уже в CoreData
+			let fetchRequest = DBCategory.fetchRequest()
+			fetchRequest.predicate = NSPredicate(format: "title == %@", promo.title as CVarArg)
+			if let _  = try context.fetch(fetchRequest).first {
+				print("CoreData: Такая акция уже есть")
+			} else {
+				print("CoreData: Создаём новую акцию")
+				// Такой акции не существует, создаём новую акцию
+				let newDBPromo = DBPromo(context: context)
+				newDBPromo.id = promo.id
+				newDBPromo.title = promo.title
+				newDBPromo.imageData = promo.banner?.pngData()
+			}
+		}
 	}
 }

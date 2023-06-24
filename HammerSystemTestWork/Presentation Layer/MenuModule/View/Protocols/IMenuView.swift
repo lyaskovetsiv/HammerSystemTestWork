@@ -10,7 +10,7 @@ import Foundation
 
 /// Протокол вью Menu модуля
 protocol IMenuView: AnyObject {
-	func reloadUI()
+	func reloadUI(type: UpdateScrollViewType)
 	func scrollTableViewTo(indexPath: IndexPath)
 	func selectCellFromCollectionView(indexPath: IndexPath)
 }

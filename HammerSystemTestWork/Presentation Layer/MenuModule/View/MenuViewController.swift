@@ -311,10 +311,14 @@ extension MenuViewController: UICollectionViewDelegateFlowLayout {
 
 extension MenuViewController: IMenuView {
 	/// Метод вью, отвечающий за перезагрузку UI
-	public func reloadUI() {
-		menuTableView.reloadData()
-		menuHeaderView.bannerCollectionView.reloadData()
-		menuHeaderView.categoriesCollectionView.reloadData()
+	public func reloadUI(type: UpdateScrollViewType) {
+		switch type {
+		case .category:
+			menuHeaderView.categoriesCollectionView.reloadData()
+			menuTableView.reloadData()
+		case .promo:
+			menuHeaderView.bannerCollectionView.reloadData()
+		}
 	}
 
 	/// Метод вью, отвечающий за скролинг таблицы в случае переключения категорий

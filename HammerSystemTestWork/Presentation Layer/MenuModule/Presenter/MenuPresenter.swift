@@ -29,28 +29,70 @@ final class MenuPresenter {
 		self.view = view
 		self.remoteDataService = remoteDataService
 		self.localDataService = localDataService
-		loadData()
+		loadCategories()
+		loadPromos()
 	}
 }
 
 extension MenuPresenter {
-	private func loadData() {
-		let result = loadCategoriesFromLocalStorage()
-		switch result {
+	private func loadCategories() {
+		let resultCategories = loadCategoriesFromLocalStorage()
+		switch resultCategories {
 		case .data(let savedCategories):
-			print("SystemLog: Загружаем данные из CoreData")
-			print(savedCategories.count)
+			print("SystemLog: Загружаем данные с категориями из CoreData")
 			self.categories = savedCategories
-			view.reloadUI()
-			loadDataFromServer()
+			for category in savedCategories {
+				foods.append(category.foods)
+			}
+			view.reloadUI(type: .category)
+			// loadCategoriesFromServer()
 		case .empty, .error:
-			print("SystemLog: Данные в CoreData отсутствуют")
-			print("SystemLog: Загружаем данные из сети")
-			loadDataFromServer()
+			// Тут можно обработать ошибки и кейс с пустыми данными
+			print("SystemLog: Данные c категориями в CoreData отсутствуют")
+			print("SystemLog: Загружаем данные с категориями из сети")
+			loadCategoriesFromServer()
 		}
 	}
 
-	private func loadDataFromServer() {
+	private func loadPromos() {
+		let resultPromos = loadPromosFromLocalStorage()
+		switch resultPromos {
+		case .data(let promo):
+			self.promo = promo
+			view.reloadUI(type: .category)
+			// loadPromoFromServer()
+		case .empty, .error:
+			// Тут можно обработать ошибки и кейс с пустыми данными
+			print("SystemLog: Данные c акциями в CoreData отсутствуют")
+			loadPromoFromServer()
+		}
+	}
+
+	// Server
+	private func loadPromoFromServer() {
+		DispatchQueue.global(qos: .background).async {
+			self.remoteDataService.fetchPromos { [weak self] result in
+				switch result {
+				case .success(let promos):
+					self?.promo = promos
+					// Сохраняем данные CoreData
+					for promo in promos {
+						self?.localDataService.savePromo(promo: promo)
+					}
+					// Обновляем интерфейс с новыми данными
+					DispatchQueue.main.async {
+						self?.view.reloadUI(type: .promo)
+					}
+				case .failure(_):
+					// Тут может быть обратока кейса с ошибкой
+					// Нет соединения или ошибка с сервера, закешированные данные всё равно отображаются на экране
+					print("Some Error")
+				}
+			}
+		}
+	}
+
+	private func loadCategoriesFromServer() {
 		DispatchQueue.global(qos: .background).async {
 			// Скачиваем данные из сети
 			self.remoteDataService.fetchCategories(completion: { [weak self] result in
@@ -64,38 +106,33 @@ extension MenuPresenter {
 					}
 					// Обновляем интерфейс с новыми данными
 					DispatchQueue.main.async {
-						self?.view.reloadUI()
+						self?.view.reloadUI(type: .category)
 					}
 				case .failure(_):
 					// Тут может быть обратока кейса с ошибкой
+					// Нет соединения или ошибка с сервера, закешированные данные всё равно отображаются на экране
+					print("")
 					print("Some Error")
 				}
 			})
-
-			self.remoteDataService.fetchPromos { [weak self] result in
-				switch result {
-				case .success(let promos):
-					self?.promo = promos
-					// Сохраняем данные CoreData
-					// ....
-					// Обновляем интерфейс с новыми данными
-					DispatchQueue.main.async {
-						self?.view.reloadUI()
-					}
-				case .failure(_):
-					// Тут может быть обратока кейса с ошибкой
-					print("Some Error")
-				}
-			}
 		}
 	}
 
+	// LocalStorage
 	private func loadCategoriesFromLocalStorage() -> LoadingLocalCategoriesResult {
 		localDataService.fetchCategories()
 	}
 
 	private func saveCategoryOnLocalStorage(category: CategoryModel) {
 		localDataService.saveCategory(category: category, foods: category.foods)
+	}
+
+	private func loadPromosFromLocalStorage() -> LoadingLocalPromoResult {
+		localDataService.fetchPromo()
+	}
+
+	private func savePromoOnLocalStorage(promo: PromoModel) {
+		localDataService.savePromo(promo: promo)
 	}
 }
 
