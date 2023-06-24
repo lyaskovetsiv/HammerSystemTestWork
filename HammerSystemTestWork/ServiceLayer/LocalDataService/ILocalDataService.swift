@@ -15,4 +15,3 @@ protocol ILocalDataService: AnyObject {
 	func fetchPromo() -> LoadingLocalPromoResult
 	func savePromo(promo: PromoModel)
 }
-

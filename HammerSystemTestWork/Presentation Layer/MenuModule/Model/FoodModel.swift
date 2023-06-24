@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-
 /// Модель блюда
 struct FoodModel {
 	let id: UUID
