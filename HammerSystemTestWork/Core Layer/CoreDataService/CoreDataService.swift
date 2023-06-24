@@ -6,9 +6,50 @@
 //
 
 import Foundation
+import CoreData
 
 
 /// Класс, отвечающий за работу с CoreData
 final class CoreDataService: ICoreDataService {
-	
+
+	// MARK: - Private properties
+
+	private lazy var persistentContainer: NSPersistentContainer = {
+		let container = NSPersistentContainer(name: "Menu")
+		container.loadPersistentStores {  _ , error in
+			guard let error else { return }
+			print(error)
+		}
+		return container
+	}()
+
+	private var viewContext: NSManagedObjectContext {
+		persistentContainer.viewContext
+	}
+
+	// MARK: - Public methods
+
+	/// Метод, возвращающий из CoreData массив c  DBCategories
+	/// - Returns: Массив DBCategories
+	public func fetchCategories() throws -> [DBCategory] {
+		let fetchRequst = DBCategory.fetchRequest()
+		return try viewContext.fetch(fetchRequst)
+	}
+
+	/// Метод, который сохраняет категорию в СoreData
+	/// - Parameter block: Замыкание с контекстом, которое может выбросить ошибку
+	public func saveCategory(block: @escaping (NSManagedObjectContext) throws -> Void) {
+		let backgroundContext = persistentContainer.newBackgroundContext()
+		backgroundContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+		backgroundContext.perform {
+			do {
+				try block(backgroundContext)
+				if backgroundContext.hasChanges {
+					try backgroundContext.save()
+				}
+			} catch {
+				print(error)
+			}
+		}
+	}
 }

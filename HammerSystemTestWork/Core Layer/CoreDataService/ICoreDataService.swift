@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import CoreData
 
 
 /// Протокол сервиса, отвечающий за работу с CoreData
 protocol ICoreDataService: AnyObject {
-	
+	func fetchCategories() throws -> [DBCategory]
+	func saveCategory(block: @escaping (NSManagedObjectContext) throws -> Void)
 }
