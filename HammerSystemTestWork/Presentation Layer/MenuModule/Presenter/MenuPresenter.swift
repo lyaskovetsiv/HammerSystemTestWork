@@ -39,16 +39,16 @@ extension MenuPresenter {
 		let resultCategories = loadCategoriesFromLocalStorage()
 		switch resultCategories {
 		case .data(let savedCategories):
-			print("SystemLog: Загружаем данные с категориями из CoreData")
+			// print("SystemLog: Загружаем данные с категориями из CoreData")
 			self.categories = savedCategories
 			for category in savedCategories {
 				foods.append(category.foods)
 			}
 			view.reloadUI(type: .category)
-			loadCategoriesFromServer()
+			loadCategoriesFromServer() // ЗАКОММЕНТИТЬ СТРОЧКУ, ЧТОБЫ ПРОВЕРИТЬ РАБОТУ COREDATA
 		case .empty, .error:
 			// Тут можно обработать ошибки и кейс с пустыми данными
-			print("SystemLog: Загружаем данные с категориями из сети")
+			// print("SystemLog: Загружаем данные с категориями из сети")
 			loadCategoriesFromServer()
 		}
 	}
@@ -57,13 +57,13 @@ extension MenuPresenter {
 		let resultPromos = loadPromosFromLocalStorage()
 		switch resultPromos {
 		case .data(let promo):
-			print("SystemLog: Загружаем данные с акциями из CoreData")
+			// print("SystemLog: Загружаем данные с акциями из CoreData")
 			self.promo = promo
 			view.reloadUI(type: .category)
-			loadPromoFromServer()
+			loadPromoFromServer()  // ЗАКОММЕНТИТЬ СТРОЧКУ, ЧТОБЫ ПРОВЕРИТЬ РАБОТУ COREDATA
 		case .empty, .error:
 			// Тут можно обработать ошибки и кейс с пустыми данными
-			print("SystemLog: Загружаем данные с категориями из сети")
+			// print("SystemLog: Загружаем данные с категориями из сети")
 			loadPromoFromServer()
 		}
 	}

@@ -26,7 +26,6 @@ final class CategoryFoodCell: UICollectionViewCell {
 
 	private lazy var titleLabel: UILabel = {
 		let label = UILabel(frame: .zero)
-		label.text = "Категория"
 		return label
 	}()
 

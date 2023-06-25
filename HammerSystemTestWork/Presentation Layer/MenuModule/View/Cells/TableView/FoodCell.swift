@@ -52,7 +52,6 @@ final class FoodCell: UITableViewCell {
 
 	private lazy var titleLabel: UILabel = {
 		let label = UILabel()
-		label.text = "Ветчина и грибы"
 		label.font = Constants.mainFont
 		label.numberOfLines = 1
 		return label
@@ -62,7 +61,6 @@ final class FoodCell: UITableViewCell {
 		let label = UILabel()
 		label.font = Constants.secondFont
 		label.textColor = Constants.secondTextColor
-		label.text = "Ветчина, шампиньоны, увеличенная порция моцареллы, томатный соус"
 		label.numberOfLines = 0
 		return label
 	} ()
@@ -73,7 +71,6 @@ final class FoodCell: UITableViewCell {
 		btn.layer.borderWidth = Constants.btnBorderWidth
 		btn.layer.borderColor = Constants.btnColor.cgColor
 		btn.tintColor = Constants.btnColor
-		btn.setTitle("от 345 р", for: .normal)
 		return btn
 	}()
 
