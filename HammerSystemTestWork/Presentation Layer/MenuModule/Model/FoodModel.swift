@@ -10,9 +10,15 @@ import UIKit
 
 /// Модель блюда
 struct FoodModel {
-	let id: UUID
+	let id: String
 	let title: String
 	let decription: String
 	var image: UIImage?
 	let price: Int
+}
+
+extension FoodModel: Comparable {
+	static func < (lhs: FoodModel, rhs: FoodModel) -> Bool {
+		lhs.id < lhs.id
+	}
 }

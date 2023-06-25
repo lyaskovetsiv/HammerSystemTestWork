@@ -51,10 +51,11 @@ final class LocalDataService: ILocalDataService {
 						}
 					}
 				}
+				let sortedFoods = sortFoods(array: foods)
 				// Возвращаем категорию
 				return CategoryModel(id: id,
 									 title: title,
-									 foods: foods)
+									 foods: sortedFoods)
 			}
 			if categories.isEmpty {
 				return .empty
@@ -149,4 +150,15 @@ final class LocalDataService: ILocalDataService {
 			}
 		}
 	}
+}
+
+// MARK: - Private methods
+
+extension LocalDataService {
+	private func sortFoods(array: [FoodModel]) -> [FoodModel] {
+		return array.sorted { food1, food2 in
+			food1.id < food2.id
+		}
+	}
+
 }
