@@ -45,7 +45,7 @@ extension MenuPresenter {
 				foods.append(category.foods)
 			}
 			view.reloadUI(type: .category)
-			// loadCategoriesFromServer()
+			loadCategoriesFromServer()
 		case .empty, .error:
 			// Тут можно обработать ошибки и кейс с пустыми данными
 			print("SystemLog: Загружаем данные с категориями из сети")
@@ -60,7 +60,7 @@ extension MenuPresenter {
 			print("SystemLog: Загружаем данные с акциями из CoreData")
 			self.promo = promo
 			view.reloadUI(type: .category)
-			// loadPromoFromServer()
+			loadPromoFromServer()
 		case .empty, .error:
 			// Тут можно обработать ошибки и кейс с пустыми данными
 			print("SystemLog: Загружаем данные с категориями из сети")
@@ -77,6 +77,7 @@ extension MenuPresenter {
 				case .success(let categories):
 					self?.categories = categories
 					// Сохраняем данные CoreData
+					self?.foods = []
 					for category in categories {
 						self?.foods.append(category.foods)
 						self?.localDataService.saveCategory(category: category, foods: category.foods)
@@ -120,12 +121,12 @@ extension MenuPresenter {
 		localDataService.fetchCategories()
 	}
 
-	private func saveCategoryOnLocalStorage(category: CategoryModel) {
-		localDataService.saveCategory(category: category, foods: category.foods)
-	}
-
 	private func loadPromosFromLocalStorage() -> LoadingLocalPromoResult {
 		localDataService.fetchPromo()
+	}
+
+	private func saveCategoryOnLocalStorage(category: CategoryModel) {
+		localDataService.saveCategory(category: category, foods: category.foods)
 	}
 
 	private func savePromoOnLocalStorage(promo: PromoModel) {
@@ -233,7 +234,7 @@ extension MenuPresenter: IMenuPresenter {
 		}
 	}
 
-	/// Метод перезентера, обрабатывающий метож ЖЦ VC viewDidAppear
+	/// Метод перезентера, обрабатывающий метод ЖЦ VC viewDidAppear
 	public func viewDidAppear() {
 		let indexPath = IndexPath(item: 0, section: 0)
 		view.selectCellFromCollectionView(indexPath: indexPath)

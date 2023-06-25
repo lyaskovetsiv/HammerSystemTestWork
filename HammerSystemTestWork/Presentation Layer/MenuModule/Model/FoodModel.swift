@@ -17,6 +17,8 @@ struct FoodModel {
 	let price: Int
 }
 
+// MARK: - Comparable
+
 extension FoodModel: Comparable {
 	static func < (lhs: FoodModel, rhs: FoodModel) -> Bool {
 		lhs.id < lhs.id

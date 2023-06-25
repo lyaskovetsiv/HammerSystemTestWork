@@ -7,6 +7,9 @@
 
 import Foundation
 
+/*
+Не нашёл подходящего API, поэтому решил просто замокть данные, чтобы продемонстрировать работу экрана с помощью MockDataService
+ */
 
 /// Класс сервиса, отвечающего за работу с удалёнными данными
 final class RemoteDataService: IRemoteDataService {

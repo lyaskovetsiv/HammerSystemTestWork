@@ -29,8 +29,8 @@ final class CoreDataService: ICoreDataService {
 
 	// MARK: - Public methods
 
-	/// Метод, возвращающий из CoreData массив c  DBCategories
-	/// - Returns: Массив DBCategories
+	/// Метод, возвращающий из CoreData массив c  категориями
+	/// - Returns: Массив с категориями
 	public func fetchCategories() throws -> [DBCategory] {
 		let fetchRequst = DBCategory.fetchRequest()
 		let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
@@ -55,8 +55,8 @@ final class CoreDataService: ICoreDataService {
 		}
 	}
 
-	/// Метод, возвращающий из CoreData массив c  DBPromo
-	/// - Returns: Массив DBPromo
+	/// Метод, возвращающий из CoreData массив c  акциями
+	/// - Returns: Массив с акциями
 	public func fetchPromo() throws -> [DBPromo] {
 		let fetchRequst = DBPromo.fetchRequest()
 		let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
@@ -64,7 +64,7 @@ final class CoreDataService: ICoreDataService {
 		return try viewContext.fetch(fetchRequst)
 	}
 
-	/// Метод, который сохраняет акцию  в СoreData
+	/// Метод, который сохраняет акцию в СoreData
 	/// - Parameter block: Замыкание с контекстом, которое может выбросить ошибку
 	public func savePromo(block: @escaping (NSManagedObjectContext) throws -> Void) {
 		let backgroundContext = persistentContainer.newBackgroundContext()
