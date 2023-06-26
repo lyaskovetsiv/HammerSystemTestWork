@@ -21,5 +21,5 @@
 3. Для сборки модулей и сервисов использовались кастомные классы assembly.
 4. Кэширование данных реализовано посредством использования CoreData.
 
-https://github.com/lyaskovetsiv/HammerSystemTestWork/assets/100786077/0ff52c19-3a4b-48d4-b247-165c24706b88
+https://github.com/lyaskovetsiv/HammerSystemTestWork/assets/100786077/7958b2ec-682f-4941-a5c7-68b16a9c8f21
 
